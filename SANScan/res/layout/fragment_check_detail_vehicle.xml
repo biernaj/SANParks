@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/check_detail_vehicle"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:textIsSelectable="true"
+    tools:context="com.sanparks.sanscan.CheckDetailVehicleFragment" >
+
+    <Button
+        android:id="@+id/buttonScanVehicleRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/title_scan_vehicle_registration" />
+
+    <EditText
+        android:id="@+id/editVehicleReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonScanVehicleRegistration"
+        android:layout_below="@+id/buttonScanVehicleRegistration"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:hint="@string/hint_licence_plate" >
+        <requestFocus />
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/checkBoxVehicleReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editVehicleReg"
+        android:layout_alignParentRight="true" />
+
+	<ImageView
+		android:id="@+id/image_preview_plate"
+		android:background="@android:color/transparent"
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+		android:contentDescription="@string/img_desc_licence_plate"
+		android:scaleType="centerInside"/>
+    
+    <Button
+        android:id="@+id/buttonScanVehicleLicenceDisc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editVehicleReg"
+        android:layout_below="@+id/editVehicleReg"
+        android:layout_marginTop="67dp"
+        android:text="@string/title_scan_licence_disc" />
+
+    <EditText
+        android:id="@+id/editVehicleLicenceDisc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonScanVehicleLicenceDisc"
+        android:layout_below="@+id/buttonScanVehicleLicenceDisc"
+        android:layout_marginTop="14dp"
+        android:ems="10" />
+
+    <CheckBox
+        android:id="@+id/checkBoxLicenceDisc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editVehicleLicenceDisc"
+        android:layout_alignLeft="@+id/checkBoxVehicleReg" />
+
+</RelativeLayout>

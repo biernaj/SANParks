@@ -1,0 +1,35 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_passenger_detail"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >
+	
+	    <Button
+	        android:id="@+id/buttonScanPassengerID"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="16dp"
+	        android:layout_marginTop="14dp"
+	        android:labelFor="@+id/editPassengerID"
+	        android:text="@string/title_scan_passenger_id" />
+	
+	    <EditText
+	        android:id="@+id/editPassengerID"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/buttonScanPassengerID"
+	        android:layout_below="@+id/buttonScanPassengerID"
+	        android:layout_marginTop="22dp"
+	        android:ems="10"
+	        android:inputType="number" >
+	
+	        <requestFocus />
+	    </EditText>
+	
+	</RelativeLayout>
+</fragment>

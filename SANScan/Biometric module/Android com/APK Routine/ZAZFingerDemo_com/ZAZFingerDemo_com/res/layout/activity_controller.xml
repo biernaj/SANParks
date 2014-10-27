@@ -1,0 +1,329 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".ControllerAct" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="295dp"
+            android:layout_weight="1.76"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/Left_Main_Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="0dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="1dp"
+                android:paddingTop="0dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:paddingBottom="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="0dp" >
+
+                    <ImageView
+                        android:id="@+id/Fingerprint_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/desc"
+                        android:src="@drawable/fingerprint" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/usb_com_type_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/usb_com_spinner_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                     
+                    </LinearLayout>
+                  <LinearLayout
+                    android:id="@+id/alg_image_type_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/com_baud_spinner_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/alg_image_type_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/editText_id_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:text="/dev/ttyMT0" >
+
+                    </EditText>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Right_Main_Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingBottom="0dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="1dp"
+                android:paddingTop="0dp" >
+
+                <LinearLayout
+                    android:id="@+id/right_one_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:id="@+id/compare_whole_Linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:id="@+id/address_linear"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical" >
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/compare_btn_linear"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical" >
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/database_Linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical" >
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/finger_input_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal" >
+					
+                    <Spinner
+                        android:id="@+id/images_type_spinner_id"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+
+                    <Spinner
+                        android:id="@+id/algorithm_version_spinner_id"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+	
+				</LinearLayout>
+                <LinearLayout
+                    android:id="@+id/finger_input_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/dakai_shebei_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/dakai_shebei" />
+
+                    <Button
+                        android:id="@+id/guanbi_shebei_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/guanbi_shebei" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/image_manage_Linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/lianxu_huoqu_iamge_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/lianxu_huoqu_iamge" />
+
+                    <Button
+                        android:id="@+id/input_finger_continue_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/input_finger_continue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/image_manage_Linear_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/continue_search_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/continue_search" />
+
+                    <Button
+                        android:id="@+id/db_clear_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/db_clear" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/image_manage_Linear_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/quxiao_dangqian_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/quxiao_dangqian" />
+
+                    <Button
+                        android:id="@+id/tuichu_chengxu_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/tuichu_chengxu" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/image_manage_Linear_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/right_linear_margin"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/match_android_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/tezheng_bidui_android" />
+
+                    <Button
+                        android:id="@+id/report_android_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/baobiao_shengcheng_android" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="248dp"
+            android:layout_height="248dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/zhengshiyong_usb_tv_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/zhengshiyong_usb"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/usb_shuchu_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="36dp"
+                android:text="@string/usb_shuchu_text"
+                android:textColor="#0000ff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="748dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</ScrollView>

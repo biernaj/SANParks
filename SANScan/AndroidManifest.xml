@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sanparks.sanscan"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" android:name="SANscan">
+		<service
+			android:name=".RecognitionService" />
+
+        <activity
+            android:name="com.sanparks.sanscan.SANscan"
+            android:label="@string/app_name" >
+			android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sanparks.sanscan.EntryListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sanparks.sanscan.CheckListActivity"
+            android:label="@string/title_check_detail"
+            android:parentActivityName="com.sanparks.sanscan.EntryListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sanscan.EntryListActivity" />
+        </activity>
+        <activity
+            android:name="com.sanparks.sanscan.CheckDetailActivity"
+            android:label="@string/title_check_detail"
+            android:parentActivityName="com.sanparks.sanscan.CheckListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sanparks.sanscan.CheckListActivity" />
+        </activity>
+        <activity
+            android:name="com.sanparks.sanscan.PassengerListActivity"
+            android:label="@string/title_passengers"
+            android:parentActivityName="com.sanparks.sanscan.PassengerListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sanparks.sanscan.CheckDetailActivity" />
+        </activity>
+        		<activity
+			android:name="com.abby.sanparks.mobile.ocr4.PreferencesActivity"
+			android:configChanges="keyboardHidden|orientation"/>
+		<activity
+			android:name="com.abby.sanparks.mobile.ocr4.RecognitionActivity"
+			android:configChanges="keyboardHidden|orientation"/>
+		<activity
+			android:name="com.abby.sanparks.mobile.ocr4.ProcessResultsActivity"
+			android:configChanges="keyboardHidden|orientation"/>
+        </application>
+
+</manifest>

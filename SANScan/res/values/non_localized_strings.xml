@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="key_recognition_languages_ocr">key_recognition_languages_ocr</string>
+	<string name="key_recognition_languages_bcr">key_recognition_languages_bcr</string>
+	<string name="key_recognition_mode_full">key_recognition_mode_full</string>
+	<string name="key_detect_page_orientation">key_detect_page_orientation</string>
+	<string name="key_prebuild_words_info">key_prebuild_words_info</string>
+	<string name="key_build_words_info">key_build_words_info</string>
+
+	<string name="ocr_language_prefix">lang.</string>
+	<string name="bcr_language_prefix">lang.</string>
+    
+</resources>

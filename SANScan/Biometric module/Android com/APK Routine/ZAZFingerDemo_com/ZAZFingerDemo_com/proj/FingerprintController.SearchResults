@@ -1,0 +1,9 @@
+---- mSingleSearchBtn Matches (4 in 1 files) ----
+ControllerAct.java (o:\01.workspace\001_work_project\13.android_finger_lib\fingerprintcontroller_1.3.4.2\src\com\haiya\fingerprintcontroller):	private Button mSingleSearchBtn ;
+ControllerAct.java (o:\01.workspace\001_work_project\13.android_finger_lib\fingerprintcontroller_1.3.4.2\src\com\haiya\fingerprintcontroller):		mSingleSearchBtn = (Button)findViewById(R.id.single_search_btn);
+ControllerAct.java (o:\01.workspace\001_work_project\13.android_finger_lib\fingerprintcontroller_1.3.4.2\src\com\haiya\fingerprintcontroller):		mSingleSearchBtn.setOnClickListener(new OnClickListener() {
+ControllerAct.java (o:\01.workspace\001_work_project\13.android_finger_lib\fingerprintcontroller_1.3.4.2\src\com\haiya\fingerprintcontroller):    	mSingleSearchBtn.setEnabled(en);
+---- mSingleSearchBtn Search Errors Encountered (2) ----
+The following 2 files could not be processed:
+O:\01.workspace\001_work_project\13.android_finger_lib\FingerprintController_1.3.4.2\proj\FingerprintController.IAB : File could not be opened.
+O:\01.workspace\001_work_project\13.android_finger_lib\FingerprintController_1.3.4.2\proj\FingerprintController.IMB : File could not be opened.

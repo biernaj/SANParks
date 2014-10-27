@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/buttonScanDriverLicence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/title_scan_drivers_licence" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonScanDriverLicence"
+        android:layout_marginTop="20dp"
+        android:labelFor="@+id/editDriver_id_number"
+        android:text="@string/title_id_number"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editDriver_id_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLines="1" >
+
+        <requestFocus />
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/check_driver_id_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editDriver_id_number"
+        android:layout_alignBottom="@+id/editDriver_id_number"
+        android:layout_toRightOf="@+id/buttonScanDriverLicence" />
+    
+</RelativeLayout>

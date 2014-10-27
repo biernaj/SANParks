@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SANScan</string>
+    <string name="title_check_detail">Check Detail</string>
+    <string name="title_scan_licence_plate">Scan Licence Plate</string>
+    <string name="title_vehicle_details">VEHICLE DETAILS</string>
+    <string name="title_scan_licence_disc">Scan Licence Disc</string>
+    <string name="hint_licence_plate">LHJ 620 GP</string>
+    <string name="title_scan_drivers_licence">Scan Driver\'s Licence/ID number</string>
+    <string name="title_id_number">ID Number</string>
+    <string name="title_passengers">Passengers</string>
+    <string name="title_add_passenger">Add a passenger</string>
+    <string name="title_add_new_entry">Add New Entry</string>
+    <string name="title_scan_registration"></string>
+    <string name="title_scan_vehicle_registration">Scan Vehicle Registration</string>
+    <string name="title_scan_passenger_id">Scan Passenger ID</string>
+    <string name="title_add_weapon">Add another Weapon</string>
+
+</resources>
