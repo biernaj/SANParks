@@ -17,6 +17,7 @@ package com.memtrip.sqlking;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.memtrip.sqlking.base.IModel;
 import com.memtrip.sqlking.helper.DatabaseHelper;
@@ -29,6 +30,8 @@ import com.memtrip.sqlking.schema.Column;
  * @author	memtrip
  */
 public class SQLInitialise {
+
+	private static final String TAG = "SQLInitialise";
 	private SQLiteDatabase mDatabase;
 	
 	public SQLiteDatabase getDatabase() {
@@ -36,6 +39,8 @@ public class SQLInitialise {
 	}
 	
 	public SQLInitialise(String name, int version, Context context, IModel[] baseModelArray) {
+		Log.v( SQLInitialise.TAG, "SQLInitialise()" );
+
 		String[] schemaArray = new String[baseModelArray.length];
 		String[] tableNameArray = new String[baseModelArray.length];
 		for (int i = 0; i < baseModelArray.length; i++) {

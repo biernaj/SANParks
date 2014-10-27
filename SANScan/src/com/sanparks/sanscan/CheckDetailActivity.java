@@ -14,21 +14,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.abbyy.mobile.ocr4.License;
-
-
-//import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
-//import android.content.DialogInterface;
-//import android.content.Intent;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
-//import android.net.Uri;
+import android.net.Uri;
 import android.os.AsyncTask;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.View;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.abbyy.sanparks.mobile.ocr4.*;
@@ -85,14 +82,14 @@ public class CheckDetailActivity extends NoSearchActivity {
 	public static final String KEY_FROM_CAMERA = "com.abbyy.sanparks.mobile.ocr4.FROM_CAMERA";
 
 	/** A request code for picking image from a gallery. */
-//	private static final int REQUEST_CODE_OPEN_PHOTO = 1;
+	private static final int REQUEST_CODE_OPEN_PHOTO = 1;
 	/** A request code for capturing image using a camera. */
-//	private static final int REQUEST_CODE_TAKE_PHOTO = 2;
+	private static final int REQUEST_CODE_TAKE_PHOTO = 2;
 
 	/** Whether image must be captured using a camera or picked from a gallery. */
 	private boolean _isFromCamera = false;
 	/** Has a result already been received. */
-//	private boolean _isResultReceived = false;
+	private boolean _isResultReceived = false;
 
 	/**
 	 * Calls counter for enableButtons/disableButtons methods. Buttons are enabled when _disableButtonsCounter
@@ -349,7 +346,6 @@ public class CheckDetailActivity extends NoSearchActivity {
 
 		_sourceButton = findViewById( R.id.button_image_source );
 		_sourceButton.setOnClickListener( new View.OnClickListener() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick( final View view ) {
 				showDialog( CheckDetailActivity.DIALOG_SELECT_IMAGE_SOURCE );
@@ -476,7 +472,6 @@ public class CheckDetailActivity extends NoSearchActivity {
 		this._imageLoadTask.execute();
 	}
 
-	@SuppressWarnings("deprecation")
 	void dispatchImageLoaded( final Bitmap image ) {
 		Log.v( CheckDetailActivity.TAG, "dispatchImageLoaded()" );
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.Application;
+import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -22,10 +23,11 @@ import com.sanparks.scanDB.*;
 
 public class SANscan extends Application {
 	
-	public ScanDB scanDB;
+	public ScanDB scanDB = new ScanDB();
 	
 	// ABBYY OCR vars
 	
+	public static Context context;
 	private static final String TAG = "SANscan";
 
 	private static final String _licenseFile = "license";
@@ -37,8 +39,12 @@ public class SANscan extends Application {
 	
 	public void onCreate() 
 	{
+        super.onCreate();
 		Log.v( SANscan.TAG, "onCreate()" );
-		scanDB.init(this);
+
+        context = getApplicationContext();
+		
+		scanDB.init();
 		
 		// Write default settings to the settings store. These values will be written only during the first
 		// startup or if the values are rubbed.
