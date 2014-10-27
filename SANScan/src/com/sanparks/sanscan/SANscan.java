@@ -44,7 +44,7 @@ public class SANscan extends Application {
 
         context = getApplicationContext();
 		
-		scanDB.init();
+		scanDB.init(context);
 		
 		// Write default settings to the settings store. These values will be written only during the first
 		// startup or if the values are rubbed.
