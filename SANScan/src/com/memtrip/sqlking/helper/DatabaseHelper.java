@@ -35,7 +35,7 @@ import com.memtrip.sqlking.schema.SQLDataType;
  * database tables. SQL statements that create tables should be defined here,
  * they should then be executed from the onCreate method. Drop queries should also
  * be provided for the database update.
- * @author	memtrip
+ * @author	memtrip, AdrianVelcich
  */
 public class DatabaseHelper {
 	/**
@@ -253,7 +253,7 @@ public class DatabaseHelper {
 			dataType = SQLDataType.SQL_INTEGER;
 		} else if (clazz.equals(boolean.class)) {
 			dataType = SQLDataType.SQL_BOOLEAN;
-		} else if (clazz.equals(long.class)) {
+		} else if (clazz.equals(long.class) || clazz.isEnum()) {
 			dataType = SQLDataType.SQL_LONG;
 		} else if (clazz.equals(double.class)) {
 			dataType = SQLDataType.SQL_REAL;
@@ -268,7 +268,7 @@ public class DatabaseHelper {
 	 * Determine the data type of the provided class reference and return
 	 * the associated ORM data type
 	 * @param	clazz	The class reference
-	 * @returnn	The ORM data type to return
+	 * @return	The ORM data type to return
 	 */
 	private static int getORMDataTypeFromClassRef(Class<?> clazz) {
 		int dataType = -1;
@@ -285,6 +285,8 @@ public class DatabaseHelper {
 			dataType = ORMDataType.FIELD_DOUBLE;
 		} else if (clazz.equals(byte[].class)) {
 			dataType = ORMDataType.FIELD_BLOB;
+		} else if (clazz.isEnum()) {
+			dataType = ORMDataType.FIELD_ENUM;
 		}
 		
 		return dataType;

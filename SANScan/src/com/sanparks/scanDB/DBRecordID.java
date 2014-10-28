@@ -2,18 +2,18 @@ package com.sanparks.scanDB;
 
 abstract public class DBRecordID {
 
-	int _id;
+	protected long id;
 	
-	public int get () {
-		return _id;
+	public long get () {
+		return id;
 	}
 
 	public String getString() {
-		return Integer.toString(_id);
+		return Long.toString(id);
 	}
 
-	public void set(int ID) {
-		_id = ID;
+	public void set(int id) {
+		this.id = id;
 	}
 
 }

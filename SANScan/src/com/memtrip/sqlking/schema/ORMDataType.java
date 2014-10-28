@@ -26,4 +26,5 @@ public class ORMDataType {
 	public static final int FIELD_DOUBLE = 3;
 	public static final int FIELD_BLOB = 4;
 	public static final int FIELD_BOOLEAN = 5;
+	public static final int FIELD_ENUM = 6;
 }
