@@ -6,25 +6,26 @@ import java.util.Map;
 import com.memtrip.sqlking.SQLInitialise;
 import com.memtrip.sqlking.SQLProvider;
 import com.memtrip.sqlking.base.IModel;
+import com.memtrip.sqlking.schema.DBForeignKey;
 
 import android.content.Context;
 
 public class ScanDB {
 	
 	private IModel[] modelArray = new IModel[] {
-			new tblAuditLog(),
-			new tblEntry(),
-			new tblImage(),
-			new tblLogin(),
-			new tblMapUser2Role(),
-			new tblMapVehicle2Entry(),
-			new tblMapVisitor2Entry(),
-			new tblMapWeapon2Entry(),
-			new tblUser(),
-			new tblUserRole(),
-			new tblVehicle(),
-			new tblVisitor(),
-			new tblWeapon(),
+//			new tblAuditLog(),
+//			new tblEntry(),
+//			new tblImage(),
+//			new tblLogin(),
+//			new tblMapUser2Role(),
+//			new tblMapVehicle2Entry(),
+//			new tblMapVisitor2Entry(),
+//			new tblMapWeapon2Entry(),
+//			new tblUser(),
+//			new tblUserRole(),
+//			new tblVehicle(),
+//			new tblVisitor(),
+//			new tblWeapon(),
 			new tblXavia()
 		};
 
@@ -82,7 +83,7 @@ public class ScanDB {
 					+ " WHERE map.entry_id = ?"
 					+ " AND v.id = map.visitor_id";
 
-		String[] whereConditions = {entryID.getString()}; 
+		String[] whereConditions = {entryID.getValString()}; 
 
 		switch (entryMode)
 		{
@@ -92,14 +93,14 @@ public class ScanDB {
 		case ENTRY_MODE_DRIVER:
 		case ENTRY_MODE_PASSENGER:
 			query += " AND map.vehicle_id = ?";
-			whereConditions[1] = vehicleID.getString();
+			whereConditions[1] = vehicleID.getValString();
 			break;
 
 		case ENTRY_MODE_ALL:
-			if (vehicleID.get() != 0)
+			if (vehicleID.getVal() != 0)
 			{
 				query += " AND map.vehicle_id = ?";
-				whereConditions[1] = vehicleID.getString();
+				whereConditions[1] = vehicleID.getValString();
 			}
 			break;
 		default:
@@ -128,7 +129,7 @@ public class ScanDB {
 					+ " WHERE map.entry_id = ?"
 					+ " AND v.id = m.vehicle_id";
 
-		String[] whereConditions = {entryID.getString()}; 
+		String[] whereConditions = {entryID.getValString()}; 
 
 		try 
 		{
@@ -152,7 +153,7 @@ public class ScanDB {
 					+ " WHERE map.entry_id = ?"
 					+ " AND w.id = map.weapon_id";
 
-		String[] whereConditions = {entryID.getString()}; 
+		String[] whereConditions = {entryID.getValString()}; 
 
 		try 
 		{

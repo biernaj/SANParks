@@ -1,15 +1,18 @@
 package com.sanparks.scanDB;
 
+import java.text.ParseException;
+
 import com.memtrip.sqlking.base.*;
+import com.memtrip.sqlking.schema.*;
 
 public class tblLogin extends ScanTableBase implements IModel {
 
-	private DBForeignKey 	xavia_id;			
-	private DBForeignKey 	user_id;			
-	private DBDate 			login_date;			// YYYY-MM-DD HH24-MM-SS
-	private E_LOGIN_STATUS 	login_status;		// [SUCCESS|FAILED_USERNAME|FAILED_MAX_ATTEMPTS|FAILED_NOT_ACTIVE]
-	private E_LOGIN_METHOD	login_method;
-	private String 			gps_coordinates;	// picked up from the Xavia, to determine entry gate				
+	private DBForeignKey 			xavia_id;			
+	private DBForeignKey 			user_id;			
+	private DBDate 					login_date;			// YYYY-MM-DD HH24-MM-SS
+	private DBEnum<E_LOGIN_STATUS> 	login_status;		// [SUCCESS|FAILED_USERNAME|FAILED_MAX_ATTEMPTS|FAILED_NOT_ACTIVE]
+	private DBEnum<E_LOGIN_METHOD>	login_method;
+	private DBString 				gps_coordinates;	// picked up from the Xavia, to determine entry gate				
 
 //	public void onCreate () {
 //		sql = "create table login ("
@@ -56,8 +59,8 @@ public class tblLogin extends ScanTableBase implements IModel {
 		return login_date;
 	}
 
-	public void setLogin_date(String login_date) {
-		this.login_date.set(login_date);
+	public void setLogin_date(String login_date) throws ParseException {
+		this.login_date.setVal(login_date);
 	}
 
 	public void setLogin_date(DBDate login_date) {
@@ -81,11 +84,11 @@ public class tblLogin extends ScanTableBase implements IModel {
 	}
 
 	public String getGps_coordinates() {
-		return gps_coordinates;
+		return gps_coordinates.getVal();
 	}
 
 	public void setGps_coordinates(String gps_coordinates) {
-		this.gps_coordinates = gps_coordinates;
+		this.gps_coordinates.setVal(gps_coordinates);
 	}
 
 }

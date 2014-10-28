@@ -3,6 +3,7 @@ package com.sanparks.sanscan;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.memtrip.sqlking.schema.DBForeignKey;
 //import com.sanparks.sanscan.WeaponListFragment.Callbacks;
 import com.sanparks.scanDB.*;
 

@@ -15,11 +15,15 @@
  */
 package com.memtrip.sqlking.schema;
 
+import com.memtrip.sqlking.base.*;
+
 /**
  * An object representation of a SQLite column
  * @author	memtrip
+ * @author	Adrian Velcich
  */
-public class Column {
+
+public class Column implements IColumn {
 	private String mName;
 	private String mType;
 	private String mValue;

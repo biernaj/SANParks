@@ -135,10 +135,20 @@ public class EnumUtils {
      * @return a long whose value provides a binary representation of the given set of enum values.
      * @throws NullPointerException if {@code enumClass} or {@code values} is {@code null}
      * @throws IllegalArgumentException if {@code enumClass} is not an enum class or has more than 64 values,
-     *                                  or if any {@code values} {@code null}
+     *                                  or if any {@code values} are {@code null}
      * @since 3.0.1
      * @see #generateBitVectors(Class, Iterable)
      */
+
+    public  <E extends Enum<E>> long generateBitVector(final Class<E> enumClass, final Enum<E> value) {
+        checkBitVectorable(enumClass);
+        Validate.notNull(value);
+        long total = 0;
+        Validate.isTrue(value != null, NULL_ELEMENTS_NOT_PERMITTED);
+        total |= 1 << value.ordinal();
+        return total;
+    }
+    
     public static <E extends Enum<E>> long generateBitVector(final Class<E> enumClass, final Iterable<? extends E> values) {
         checkBitVectorable(enumClass);
         Validate.notNull(values);

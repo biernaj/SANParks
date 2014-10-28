@@ -1,6 +1,7 @@
 package com.sanparks.scanDB;
 
 import com.memtrip.sqlking.base.*;
+import com.memtrip.sqlking.schema.DBForeignKey;
 
 public class tblMapUser2Role extends ScanTableBase implements IModel {
 

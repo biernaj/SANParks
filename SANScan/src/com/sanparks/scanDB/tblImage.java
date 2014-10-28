@@ -1,14 +1,17 @@
 package com.sanparks.scanDB;
 
+import java.text.ParseException;
+
 import com.memtrip.sqlking.base.*;
+import com.memtrip.sqlking.schema.*;
 
 public class tblImage extends ScanTableBase implements IModel{
 
-	private String 			table_name;			// dynamic foreign key table name
+	private DBString 		table_name;			// dynamic foreign key table name
 	private DBForeignKey	table_id;			// dynamic foreign key record id
 	private DBDate 			img_date;			// YYYY-MM-DD HH24-MM-SS	
-	private String 			img_filename;
-	private byte[]			img_data;			// BLOB	
+	private DBString 		img_filename;
+	private DBBlob			img_data;			// BLOB	
 
 //	public void onCreate () {
 //		sql = "create table image ("
@@ -35,43 +38,43 @@ public class tblImage extends ScanTableBase implements IModel{
 //	}
 
 	public String getTable_name() {
-		return table_name;
+		return table_name.getVal();
 	}
 
 	public void setTable_name(String table_name) {
-		this.table_name = table_name;
+		this.table_name.setVal(table_name);
 	}
 
-	public DBForeignKey getTable_id() {
-		return table_id;
+	public int getTable_id() {
+		return table_id.getVal();
 	}
 
 	public void setTable_id(DBForeignKey table_id) {
 		this.table_id = table_id;
 	}
 
-	public DBDate getImg_date() {
-		return img_date;
+	public String getImg_date() {
+		return img_date.getValString();
 	}
 
-	public void setImg_date(DBDate img_date) {
-		this.img_date = img_date;
+	public void setImg_date(String img_date) throws ParseException {
+		this.img_date.setVal(img_date);
 	}
 
 	public String getImg_filename() {
-		return img_filename;
+		return img_filename.getVal();
 	}
 
 	public void setImg_filename(String img_filename) {
-		this.img_filename = img_filename;
+		this.img_filename.setVal(img_filename);
 	}
 
 	public byte[] getImg_data() {
-		return img_data;
+		return img_data.getVal();
 	}
 
 	public void setImg_data(byte[] img_data) {
-		this.img_data = img_data;
+		this.img_data.setVal(img_data);
 	}
 
 }

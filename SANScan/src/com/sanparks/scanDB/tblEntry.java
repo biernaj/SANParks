@@ -1,20 +1,23 @@
 package com.sanparks.scanDB;
 
+import java.text.ParseException;
+
 import com.memtrip.sqlking.base.*;
+import com.memtrip.sqlking.schema.*;
 
 public class tblEntry extends ScanTableBase implements IModel {
 
-	private DBForeignKey 		xavia_id;
-	private DBForeignKey		user_id;			// Operator's user record id
-	private String 				entry_date;			// YYYY-MM-DD HH24-MM-SS
-	private E_ENTRY_REASON		entry_reason;		
-	private int 				total_visitor_count;// May differ from scanned occupant count (allows for visitors without ID)
-	private boolean				b_manual_capture;	// Manual Capture was necessary
-	private boolean 			b_authorised;	 
-	private boolean 			b_suspicious;	
-	private boolean 			b_firearms;			// Boolean
-	private String 				comments;			// User comments
-	private String				gps_coordinates;	// picked up from the Xavia, to determine which entry gate				
+	private DBForeignKey 			xavia_id;
+	private DBForeignKey			user_id;			// Operator's user record id
+	private DBDate 					entry_date;			// YYYY-MM-DD HH24-MM-SS
+	private DBEnum<E_ENTRY_REASON>	entry_reason;		
+	private DBInteger				total_visitor_count;// May differ from scanned occupant count (allows for visitors without ID)
+	private DBBoolean				b_manual_capture;	// Manual Capture was necessary
+	private DBBoolean 				b_authorised;	 
+	private DBBoolean 				b_suspicious;	
+	private DBBoolean 				b_firearms;			// Boolean
+	private DBString 				comments;			// User comments
+	private DBString				gps_coordinates;	// picked up from the Xavia, to determine which entry gate				
 
 //	public String onCreate() {
 //		return "create table entry ("
@@ -52,75 +55,75 @@ public class tblEntry extends ScanTableBase implements IModel {
 	}
 
 	public String getEntry_date() {
-		return entry_date;
+		return entry_date.getValString();
 	}
 
-	public void setEntry_date(String entry_date) {
-		this.entry_date = entry_date;
+	public void setEntry_date(String entry_date) throws ParseException {
+		this.entry_date.setVal(entry_date);
 	}
 
 	public boolean getB_manual_capture() {
-		return b_manual_capture;
+		return b_manual_capture.isVal();
 	}
 
 	public void setB_manual_capture(boolean b_manual_capture) {
-		this.b_manual_capture = b_manual_capture;
+		this.b_manual_capture.setVal(b_manual_capture);
 	}
 
 	public boolean isB_authorised() {
-		return b_authorised;
+		return b_authorised.isVal();
 	}
 
 	public void setB_authorised(boolean b_authorised) {
-		this.b_authorised = b_authorised;
+		this.b_authorised.setVal(b_authorised);
 	}
 
 	public int getVisitor_count() {
-		return total_visitor_count;
+		return total_visitor_count.getVal();
 	}
 
 	public void setVisitor_count(int visitor_count) {
-		this.total_visitor_count = visitor_count;
+		this.total_visitor_count.setVal(visitor_count);
 	}
 
 	public boolean isB_suspicious() {
-		return b_suspicious;
+		return b_suspicious.isVal();
 	}
 
 	public void setB_suspicious(boolean b_suspicious) {
-		this.b_suspicious = b_suspicious;
+		this.b_suspicious.setVal(b_suspicious);
 	}
 
 	public E_ENTRY_REASON getE_entry_reason() {
-		return entry_reason;
+		return entry_reason.getVal();
 	}
 
 	public void setE_entry_reason(E_ENTRY_REASON e_entry_reason) {
-		this.entry_reason = e_entry_reason;
+		this.entry_reason.setVal(e_entry_reason);
 	}
 
 	public boolean isB_firearms() {
-		return b_firearms;
+		return b_firearms.isVal();
 	}
 
 	public void setB_firearms(boolean b_firearms) {
-		this.b_firearms = b_firearms;
+		this.b_firearms.setVal(b_firearms);
 	}
 
 	public String getComments() {
-		return comments;
+		return comments.getVal();
 	}
 
 	public void setComments(String comments) {
-		this.comments = comments;
+		this.comments.setVal(comments);
 	}
 
 	public String getGps_coordinates() {
-		return gps_coordinates;
+		return gps_coordinates.getVal();
 	}
 
 	public void setGps_coordinates(String gps_coordinates) {
-		this.gps_coordinates = gps_coordinates;
+		this.gps_coordinates.setVal(gps_coordinates);
 	}
 	
 }

@@ -1,15 +1,16 @@
 package com.sanparks.scanDB;
 
 import com.memtrip.sqlking.base.*;
+import com.memtrip.sqlking.schema.*;
 
 public class tblXavia extends ScanTableBase implements IModel {
 
-	private String		serial_number;			// XAVIA serial number
-	private String 		IMEI; 					
-	private DBDate 		commissioned;			// YYYY-MM-DD HH24:MM:SS	
-	private	E_DB_SYNCH 	db_synch_status;			
-	private DBDate 		db_last_synch_started;	// YYYY-MM-DD HH24:MM:SS.SSS	
-	private DBDate 		db_last_good_synch;		// YYYY-MM-DD HH24:MM:SS.SSS	
+	private DBString			serial_number;			// XAVIA serial number
+	private DBString 			IMEI; 					
+	private DBDate 				commissioned;			// YYYY-MM-DD HH24:MM:SS	
+	private	DBEnum<E_DB_SYNCH>	db_synch_status;			
+	private DBDate 				db_last_synch_started;	// YYYY-MM-DD HH24:MM:SS.SSS	
+	private DBDate 				db_last_good_synch;		// YYYY-MM-DD HH24:MM:SS.SSS	
 
 //	public void onCreate () {
 //		sql = "create table xavia ("
@@ -24,17 +25,17 @@ public class tblXavia extends ScanTableBase implements IModel {
 //		
 //	}
 	
-	public String getSerial_number() {
+	public DBString getSerial_number() {
 		return serial_number;
 	}
 	public void setUnit_serial_number(String xavia_serial_number) {
-		this.serial_number = xavia_serial_number;
+		serial_number.setVal(xavia_serial_number);
 	}
-	public String getIMEI() {
+	public DBString getIMEI() {
 		return this.IMEI;
 	}
 	public void setIMEI(String xavia_IMEI) {
-		this.IMEI = xavia_IMEI;
+		IMEI.setVal(xavia_IMEI);
 	}
 	public DBDate getCommissioned() {
 		return commissioned;
@@ -43,14 +44,20 @@ public class tblXavia extends ScanTableBase implements IModel {
 		this.commissioned = xavia_commissioned;
 	}
 
-	public E_DB_SYNCH getDb_synch_status() {
+//	public E_DB_SYNCH getDb_synch_status() {
+//		return db_synch_status;
+//	}
+//
+//	public void setDb_synch_status(E_DB_SYNCH db_synch_status) {
+//		this.db_synch_status = db_synch_status;
+//	}
+
+	public DBEnum <E_DB_SYNCH> getDb_synch_status() {
 		return db_synch_status;
 	}
-
-	public void setDb_synch_status(E_DB_SYNCH db_synch_status) {
+	public void setDb_synch_status(DBEnum <E_DB_SYNCH> db_synch_status) {
 		this.db_synch_status = db_synch_status;
 	}
-
 	public DBDate getDb_last_synch_started() {
 		return db_last_synch_started;
 	}

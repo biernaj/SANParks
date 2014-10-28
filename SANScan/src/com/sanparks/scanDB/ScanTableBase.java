@@ -1,12 +1,14 @@
 package com.sanparks.scanDB;
 
+import com.memtrip.sqlking.schema.*;
+
 public abstract class ScanTableBase 
 	{
 	// Fields common to all tables
-	private 	DBRecordID		id;	// Record ID
-	private		E_DB_SYNCH		synch_status;
-	private		DBDate			synch_date;
-
+	protected	DBRecordID		id;
+	protected	E_DB_SYNCH		synch_status;
+	protected	DBDate			synch_date;
+	
 //	public abstract int add		(); 
 //	public abstract int update	(); 
 //	public abstract int delete	(); 
@@ -34,6 +36,11 @@ public abstract class ScanTableBase
 	public DBRecordID getId() 
 	{
 		return id;
+	}
+
+	protected void setId(DBRecordID id) 
+	{
+		this.id = id;
 	}
 
 	public E_DB_SYNCH get_record_synch_status() 

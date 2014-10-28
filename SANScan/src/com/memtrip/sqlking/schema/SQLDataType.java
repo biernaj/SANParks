@@ -26,4 +26,5 @@ public class SQLDataType {
 	public static final String SQL_LONG = "long";
 	public static final String SQL_REAL = "real";
 	public static final String SQL_BLOB = "blob";
+	public static final String SQL_ENUM = "long";
 }

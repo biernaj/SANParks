@@ -127,6 +127,31 @@ public class DatabaseHelper {
 					case ORMDataType.FIELD_DOUBLE:
 						resultMap.put(columnName, (T)Double.valueOf(cursor.getDouble(index)));
 						break;
+
+					case ORMDataType.FIELD_ENUM:
+						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
+						break;
+					
+					case ORMDataType.FIELD_PRIMARY_KEY:
+						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
+						break;
+					
+					case ORMDataType.FIELD_FOREIGN_KEY:
+						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
+						break;
+					
+					case ORMDataType.FIELD_DATE:
+						resultMap.put(columnName, (T)Integer.valueOf(cursor.getInt(index)));
+						break;
+					
+					case ORMDataType.FIELD_TIME:
+						resultMap.put(columnName, (T)Integer.valueOf(cursor.getInt(index)));
+						break;
+					
+					case ORMDataType.FIELD_DATETIME:
+						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
+						break;
+					
 				}
 			}
 			
@@ -154,15 +179,23 @@ public class DatabaseHelper {
 			
 			if (type.equals(SQLDataType.SQL_TEXT)) {
 				contentValues.put(name, (String)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+
 			} else if (type.equals(SQLDataType.SQL_INTEGER)) {
 				contentValues.put(name, ((Integer)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).intValue());
+
 			} else if (type.equals(SQLDataType.SQL_BOOLEAN)) {
 				boolean value = ((Boolean)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).booleanValue();
 				contentValues.put(name, value ? 1 : 0);
+
 			} else if (type.equals(SQLDataType.SQL_LONG)) {
 				contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).longValue());
+
+			} else if (type.equals(SQLDataType.SQL_ENUM)) {
+				contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).longValue());
+
 			} else if (type.equals(SQLDataType.SQL_REAL)) {
 				contentValues.put(name, ((Double)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).doubleValue());
+
 			} else if (type.equals(SQLDataType.SQL_BLOB)) {
 				contentValues.put(name, (byte[])ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
 			}
@@ -253,8 +286,10 @@ public class DatabaseHelper {
 			dataType = SQLDataType.SQL_INTEGER;
 		} else if (clazz.equals(boolean.class)) {
 			dataType = SQLDataType.SQL_BOOLEAN;
-		} else if (clazz.equals(long.class) || clazz.isEnum()) {
+		} else if (clazz.equals(long.class)) {
 			dataType = SQLDataType.SQL_LONG;
+		} else if (clazz.isEnum()) {
+			dataType = SQLDataType.SQL_ENUM;
 		} else if (clazz.equals(double.class)) {
 			dataType = SQLDataType.SQL_REAL;
 		} else if (clazz.equals(byte[].class)) {
@@ -348,6 +383,23 @@ public class DatabaseHelper {
 			case ORMDataType.FIELD_DOUBLE:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getDouble(index));
 			break;
+
+			case ORMDataType.FIELD_ENUM:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
+			break;
+			
+			case ORMDataType.FIELD_DATE:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
+			break;
+			
+			case ORMDataType.FIELD_TIME:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
+			break;
+			
+			case ORMDataType.FIELD_DATETIME:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
+			break;
+			
 		}
 	}
 }
