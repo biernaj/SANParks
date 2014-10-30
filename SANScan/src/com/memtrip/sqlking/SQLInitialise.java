@@ -61,6 +61,10 @@ public class SQLInitialise {
 	private String buildSchemaFromBaseModel(IModel baseModel) {
 		String tableName = ReflectionHelper.getClassName(baseModel);
 		Column[] columns = DatabaseHelper.getSQLColumnFromBaseModel(baseModel);
-		return StringHelper.buildCreateTableStatement(tableName, columns);
+
+		String createStatement = StringHelper.buildCreateTableStatement(tableName, columns); 
+		Log.w(new String("SQLInitialise"), createStatement);
+
+		return createStatement; 
 	}
 }

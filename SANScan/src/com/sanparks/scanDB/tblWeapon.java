@@ -1,19 +1,19 @@
 package com.sanparks.scanDB;
 
 import com.memtrip.sqlking.base.*;
-import com.memtrip.sqlking.schema.DBForeignKey;
+import com.memtrip.sqlking.schema.*;
 
 public class tblWeapon extends ScanTableBase implements IModel{
 
 	private DBForeignKey	visitor_id;
-	private E_WEAPON_TYPE	weapon_type;  
-	private String			make;
-	private	String			model;
-	private String			caliber;
-	private String			serial_number;
-	private String			licence_number;
-	private boolean			b_licence_valid;
-	private int				suspicion_count;
+	private DBEnum			weapon_type; // E_WEAPON_TYPE  
+	private DBString		make;
+	private	DBString		model;
+	private DBString		caliber;
+	private DBString		serial_number;
+	private DBString		licence_number;
+	private DBBoolean		b_licence_valid;
+	private DBInteger		suspicion_count;
 	
 //	public void onCreate () {
 //	sql = "create table firearm ("
@@ -42,59 +42,64 @@ public class tblWeapon extends ScanTableBase implements IModel{
 //public int delete() {
 //	return 0;
 //}
-	public DBForeignKey getVisitor_id() {
-		return visitor_id;
+	public int getVisitor_id() {
+		return visitor_id.getVal();
 	}
-	public void setVisitor_id(DBForeignKey visitor_id) {
-		this.visitor_id = visitor_id;
+	public void setVisitor_id(int visitor_id) {
+		this.visitor_id.setVal(visitor_id);
 	}
 	public E_WEAPON_TYPE getWeapon_type() {
-		return weapon_type;
+		final Class<E_WEAPON_TYPE> enumClass = E_WEAPON_TYPE.class;
+
+		return (E_WEAPON_TYPE) weapon_type.getVal(enumClass);
 	}
-	public void setWeapon_type(E_WEAPON_TYPE weapon_type) {
-		this.weapon_type = weapon_type;
+	public void setWeapon_type(E_WEAPON_TYPE newVal) {
+		final Class<E_WEAPON_TYPE> enumClass = E_WEAPON_TYPE.class;
+
+		this.weapon_type.setVal(enumClass, newVal);
 	}
+
 	public String getMake() {
-		return make;
+		return make.getVal();
 	}
 	public void setMake(String make) {
-		this.make = make;
+		this.make.setVal(make);
 	}
 	public String getModel() {
-		return model;
+		return model.getVal();
 	}
 	public void setModel(String model) {
-		this.model = model;
+		this.model.setVal(model);
 	}
 	public String getCaliber() {
-		return caliber;
+		return caliber.getVal();
 	}
 	public void setCaliber(String caliber) {
-		this.caliber = caliber;
+		this.caliber.setVal(caliber);
 	}
 	public String getSerial_number() {
-		return serial_number;
+		return serial_number.getVal();
 	}
 	public void setSerial_number(String serial_number) {
-		this.serial_number = serial_number;
+		this.serial_number.setVal(serial_number);
 	}
 	public String getLicence_number() {
-		return licence_number;
+		return licence_number.getVal();
 	}
 	public void setLicence_number(String licence_number) {
-		this.licence_number = licence_number;
+		this.licence_number.setVal(licence_number);
 	}
 	public boolean isB_licence_valid() {
-		return b_licence_valid;
+		return b_licence_valid.isVal();
 	}
 	public void setB_licence_valid(boolean b_licence_valid) {
-		this.b_licence_valid = b_licence_valid;
+		this.b_licence_valid.setVal(b_licence_valid);
 	}
 	public int getSuspicion_count() {
-		return suspicion_count;
+		return suspicion_count.getVal();
 	}
 	public void setSuspicion_count(int suspicion_count) {
-		this.suspicion_count = suspicion_count;
+		this.suspicion_count.setVal(suspicion_count);
 	}
 
 }

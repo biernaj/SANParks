@@ -1,19 +1,33 @@
 package com.memtrip.sqlking.schema;
 
+//import java.util.EnumSet;
+//import java.util.List;
+
 import com.memtrip.sqlking.base.IColumn;
 import com.memtrip.sqlking.helper.EnumUtils;
+import com.memtrip.sqlking.helper.Validate;
 
-public final class DBEnum<E extends Enum<E>> implements IColumn {
+public final class DBEnum implements IColumn {
 
 	protected long val;
 
-	@SuppressWarnings("hiding")
-	public static final <E extends Enum<E>> DBEnum<E> getVal() {
-		return EnumUtils.processBitVector(<E extends Enum<E>> Enum<E>, val);
+	public final <E extends Enum<E>> Enum<E> getVal(final Class<E> enumClass) {
+		
+        EnumUtils.checkBitVectorable(enumClass).getEnumConstants();
+//        final EnumSet<E> results = EnumSet.noneOf(EnumUtils.asEnum(enumClass));
+        
+        Validate.notNull(val);
+        
+        for (final E constant : enumClass.getEnumConstants()) {
+            if ((val & 1 << (constant.ordinal() % Long.SIZE)) != 0) {
+                return constant;
+            }
+        }
+        return null;
 	}
 	
-	public final <E extends Enum<E>> void setVal(final String enumName) {
-		val = EnumUtils.generateBitVector(<E>, enumName);
+	public final <E extends Enum<E>> void setVal(final Class<E> enumClass, final Enum<E> enumName) {
+		val = EnumUtils.generateBitVector(enumClass, enumName);
 	}
 	
 }

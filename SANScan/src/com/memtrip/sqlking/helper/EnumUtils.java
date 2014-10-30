@@ -140,7 +140,7 @@ public class EnumUtils {
      * @see #generateBitVectors(Class, Iterable)
      */
 
-    public  <E extends Enum<E>> long generateBitVector(final Class<E> enumClass, final Enum<E> value) {
+    public static  <E extends Enum<E>> long generateBitVector(final Class<E> enumClass, final Enum<E> value) {
         checkBitVectorable(enumClass);
         Validate.notNull(value);
         long total = 0;
@@ -304,7 +304,7 @@ public class EnumUtils {
      * @throws IllegalArgumentException if {@code enumClass} is not an enum class or has more than 64 values
      * @since 3.0.1
      */
-    private static <E extends Enum<E>> Class<E> checkBitVectorable(final Class<E> enumClass) {
+    public static <E extends Enum<E>> Class<E> checkBitVectorable(final Class<E> enumClass) {
         final E[] constants = asEnum(enumClass).getEnumConstants();
         Validate.isTrue(constants.length <= Long.SIZE, CANNOT_STORE_S_S_VALUES_IN_S_BITS, 
             Integer.valueOf(constants.length), enumClass.getSimpleName(), Integer.valueOf(Long.SIZE));
@@ -321,7 +321,7 @@ public class EnumUtils {
      * @throws IllegalArgumentException if {@code enumClass} is not an enum class
      * @since 3.2
      */
-    private static <E extends Enum<E>> Class<E> asEnum(final Class<E> enumClass) {
+    public static <E extends Enum<E>> Class<E> asEnum(final Class<E> enumClass) {
         Validate.notNull(enumClass, ENUM_CLASS_MUST_BE_DEFINED);
         Validate.isTrue(enumClass.isEnum(), S_DOES_NOT_SEEM_TO_BE_AN_ENUM_TYPE, enumClass);
         return enumClass;

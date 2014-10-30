@@ -26,7 +26,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.memtrip.sqlking.base.IModel;
-import com.memtrip.sqlking.schema.Column;
+import com.memtrip.sqlking.schema.*;
 import com.memtrip.sqlking.schema.ORMDataType;
 import com.memtrip.sqlking.schema.SQLDataType;
 
@@ -280,21 +280,52 @@ public class DatabaseHelper {
 	private static String getSQLDataTypeFromClassRef(Class<?> clazz) {
 		String dataType = null;
 		
-		if (clazz.equals(String.class)) {
+		if (clazz.equals(DBString.class)) {
 			dataType = SQLDataType.SQL_TEXT;
-		} else if (clazz.equals(int.class)) {
+
+		} else if (clazz.equals(DBInteger.class)) {
 			dataType = SQLDataType.SQL_INTEGER;
-		} else if (clazz.equals(boolean.class)) {
+		
+		} else if (clazz.equals(DBBoolean.class)) {
 			dataType = SQLDataType.SQL_BOOLEAN;
-		} else if (clazz.equals(long.class)) {
+		
+		} else if (clazz.equals(DBLong.class)) {
 			dataType = SQLDataType.SQL_LONG;
-		} else if (clazz.isEnum()) {
+		
+		} else if (clazz.equals(DBDate.class)) {		
+			dataType = SQLDataType.SQL_LONG;
+		
+		} else if (clazz.equals(DBEnum.class)) {
 			dataType = SQLDataType.SQL_ENUM;
-		} else if (clazz.equals(double.class)) {
+		
+		} else if (clazz.equals(DBReal.class)) {
 			dataType = SQLDataType.SQL_REAL;
-		} else if (clazz.equals(byte[].class)) {
+		
+		} else if (clazz.equals(DBBlob.class)) {
 			dataType = SQLDataType.SQL_BLOB;
+
+		} else if (clazz.equals(DBForeignKey.class)) {
+			dataType = SQLDataType.SQL_INTEGER;
+		
+		} else if (clazz.equals(DBPrimaryKey.class)) {
+			dataType = SQLDataType.SQL_INTEGER;
 		}
+
+//		if (clazz.equals(String.class)) {
+//			dataType = SQLDataType.SQL_TEXT;
+//	} else if (clazz.equals(int.class)) {
+//		dataType = SQLDataType.SQL_INTEGER;
+//	} else if (clazz.equals(boolean.class)) {
+//		dataType = SQLDataType.SQL_BOOLEAN;
+//	} else if (clazz.equals(long.class)) {
+//		dataType = SQLDataType.SQL_LONG;
+//	} else if (clazz.isEnum()) {
+//		dataType = SQLDataType.SQL_ENUM;
+//	} else if (clazz.equals(double.class)) {
+//		dataType = SQLDataType.SQL_REAL;
+//	} else if (clazz.equals(byte[].class)) {
+//		dataType = SQLDataType.SQL_BLOB;
+//	}
 		
 		return dataType;
 	}
@@ -308,21 +339,52 @@ public class DatabaseHelper {
 	private static int getORMDataTypeFromClassRef(Class<?> clazz) {
 		int dataType = -1;
 		
-		if (clazz.equals(String.class)) {
+		if (clazz.equals(DBString.class)) {
 			dataType = ORMDataType.FIELD_STRING;
-		} else if (clazz.equals(int.class)) {
+
+		} else if (clazz.equals(DBInteger.class)) {
 			dataType = ORMDataType.FIELD_INTEGER;
-		} else if (clazz.equals(boolean.class)) {
+		
+		} else if (clazz.equals(DBBoolean.class)) {
 			dataType = ORMDataType.FIELD_BOOLEAN;
-		} else if (clazz.equals(long.class)) {
+		
+		} else if (clazz.equals(DBLong.class)) {
 			dataType = ORMDataType.FIELD_LONG;
-		} else if (clazz.equals(double.class)) {
+		
+		} else if (clazz.equals(DBDate.class)) {
+			dataType = ORMDataType.FIELD_LONG;
+		
+		} else if (clazz.equals(DBReal.class)) {
 			dataType = ORMDataType.FIELD_DOUBLE;
-		} else if (clazz.equals(byte[].class)) {
+		
+		} else if (clazz.equals(DBBlob.class)) {
 			dataType = ORMDataType.FIELD_BLOB;
-		} else if (clazz.isEnum()) {
+		
+		} else if (clazz.equals(DBEnum.class)) {
 			dataType = ORMDataType.FIELD_ENUM;
+
+		} else if (clazz.equals(DBForeignKey.class)) {
+			dataType = ORMDataType.FIELD_FOREIGN_KEY;
+
+		} else if (clazz.equals(DBPrimaryKey.class)) {
+			dataType = ORMDataType.FIELD_PRIMARY_KEY;
 		}
+		
+//		if (clazz.equals(String.class)) {
+//			dataType = ORMDataType.FIELD_STRING;
+//		} else if (clazz.equals(int.class)) {
+//			dataType = ORMDataType.FIELD_INTEGER;
+//		} else if (clazz.equals(boolean.class)) {
+//			dataType = ORMDataType.FIELD_BOOLEAN;
+//		} else if (clazz.equals(long.class)) {
+//			dataType = ORMDataType.FIELD_LONG;
+//		} else if (clazz.equals(double.class)) {
+//			dataType = ORMDataType.FIELD_DOUBLE;
+//		} else if (clazz.equals(byte[].class)) {
+//			dataType = ORMDataType.FIELD_BLOB;
+//		} else if (clazz.isEnum()) {
+//			dataType = ORMDataType.FIELD_ENUM;
+//		}
 		
 		return dataType;
 	}
@@ -361,45 +423,38 @@ public class DatabaseHelper {
 		switch (columnType) {
 			case ORMDataType.FIELD_STRING:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getString(index));
-			break;
+				break;
 			
-			case ORMDataType.FIELD_INTEGER:
+			case ORMDataType.FIELD_INTEGER:			// Fall thru
+			case ORMDataType.FIELD_PRIMARY_KEY:		// Fall thru
+			case ORMDataType.FIELD_FOREIGN_KEY:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
-			break;
+				break;
 			
 			case ORMDataType.FIELD_BOOLEAN:
 				boolean value = cursor.getInt(index) == 1 ? true : false;
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, value);
-			break;
+				break;
 			
 			case ORMDataType.FIELD_LONG:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
-			break;
+				break;
 			
 			case ORMDataType.FIELD_BLOB:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getBlob(index));
-			break;
+				break;
 			
 			case ORMDataType.FIELD_DOUBLE:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getDouble(index));
-			break;
+				break;
 
 			case ORMDataType.FIELD_ENUM:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
-			break;
+				break;
 			
 			case ORMDataType.FIELD_DATE:
-				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
-			break;
-			
-			case ORMDataType.FIELD_TIME:
-				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
-			break;
-			
-			case ORMDataType.FIELD_DATETIME:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
-			break;
-			
+				break;
 		}
 	}
 }

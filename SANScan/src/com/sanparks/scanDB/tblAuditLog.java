@@ -38,12 +38,12 @@ public class tblAuditLog extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public DBForeignKey getXavia_id() {
-		return xavia_id;
+	public int getXavia_id() {
+		return xavia_id.getVal();
 	}
 
-	public void setXavia_id(DBForeignKey xavia_id) {
-		this.xavia_id = xavia_id;
+	public void setXavia_id(int xavia_id) {
+		this.xavia_id.setVal(xavia_id);
 	}
 
 	public String getLog_date() {

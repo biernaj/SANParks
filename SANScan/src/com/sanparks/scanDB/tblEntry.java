@@ -10,7 +10,7 @@ public class tblEntry extends ScanTableBase implements IModel {
 	private DBForeignKey 			xavia_id;
 	private DBForeignKey			user_id;			// Operator's user record id
 	private DBDate 					entry_date;			// YYYY-MM-DD HH24-MM-SS
-	private DBEnum<E_ENTRY_REASON>	entry_reason;		
+	private DBEnum					entry_reason;		// E_ENTRY_REASON		
 	private DBInteger				total_visitor_count;// May differ from scanned occupant count (allows for visitors without ID)
 	private DBBoolean				b_manual_capture;	// Manual Capture was necessary
 	private DBBoolean 				b_authorised;	 
@@ -38,20 +38,20 @@ public class tblEntry extends ScanTableBase implements IModel {
 //		
 //	}
 
-	public DBForeignKey getXavia_id() {
-		return xavia_id;
+	public int getXavia_id() {
+		return xavia_id.getVal();
 	}
 
-	public void setXavia_id(DBForeignKey xavia_id) {
-		this.xavia_id = xavia_id;
+	public void setXavia_id(int xavia_id) {
+		this.xavia_id.setVal(xavia_id);
 	}
 
-	public DBForeignKey getUser_id() {
-		return user_id;
+	public int getUser_id() {
+		return user_id.getVal();
 	}
 
-	public void setUser_id(DBForeignKey user_id) {
-		this.user_id = user_id;
+	public void setUser_id(int user_id) {
+		this.user_id.setVal(user_id);
 	}
 
 	public String getEntry_date() {
@@ -94,14 +94,18 @@ public class tblEntry extends ScanTableBase implements IModel {
 		this.b_suspicious.setVal(b_suspicious);
 	}
 
-	public E_ENTRY_REASON getE_entry_reason() {
-		return entry_reason.getVal();
+	public E_ENTRY_REASON getEntry_reason() {
+		final Class<E_ENTRY_REASON> enumClass = E_ENTRY_REASON.class;
+		
+		return (E_ENTRY_REASON) entry_reason.getVal(enumClass);
 	}
 
-	public void setE_entry_reason(E_ENTRY_REASON e_entry_reason) {
-		this.entry_reason.setVal(e_entry_reason);
-	}
+	public void setEntry_reason(E_ENTRY_REASON newVal) {
+		final Class<E_ENTRY_REASON> enumClass = E_ENTRY_REASON.class;
 
+		this.entry_reason.setVal(enumClass, newVal);
+	}	
+	
 	public boolean isB_firearms() {
 		return b_firearms.isVal();
 	}

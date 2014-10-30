@@ -34,20 +34,20 @@ public class tblMapWeapon2Entry extends ScanTableBase implements IModel{
 //		return 0;
 //	}
 
-	public DBForeignKey getEntry_id() {
-		return entry_id;
+	public int getEntry_id() {
+		return entry_id.getVal();
 	}
 
-	public void setEntry_id(DBForeignKey entry_id) {
-		this.entry_id = entry_id;
+	public void setEntry_id(int entry_id) {
+		this.entry_id.setVal(entry_id);
 	}
 
-	public DBForeignKey getWeapon_id() {
-		return weapon_id;
+	public int getWeapon_id() {
+		return weapon_id.getVal();
 	}
 
-	public void setWeapon_id(DBForeignKey weapon_id) {
-		this.weapon_id = weapon_id;
+	public void setWeapon_id(int weapon_id) {
+		this.weapon_id.setVal(weapon_id);
 	}
 
 

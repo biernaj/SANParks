@@ -58,20 +58,20 @@ public class tblUser extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public DBForeignKey getXavia_id() {
-		return xavia_id;
+	public int getXavia_id() {
+		return xavia_id.getVal();
 	}
 
-	public void setXavia_id(DBForeignKey xavia_id) {
-		this.xavia_id = xavia_id;
+	public void setXavia_id(int xavia_id) {
+		this.xavia_id.setVal(xavia_id);
 	}
 
-	public DBForeignKey getAdded_by_user_id() {
-		return added_by_user_id;
+	public int getAdded_by_user_id() {
+		return added_by_user_id.getVal();
 	}
 
-	public void setAdded_by_user_id(DBForeignKey user_id) {
-		this.added_by_user_id = user_id;
+	public void setAdded_by_user_id(int user_id) {
+		this.added_by_user_id.setVal(user_id);
 	}
 
 	public String getUsername() {

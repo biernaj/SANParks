@@ -7,12 +7,12 @@ import com.memtrip.sqlking.schema.*;
 
 public class tblLogin extends ScanTableBase implements IModel {
 
-	private DBForeignKey 			xavia_id;			
-	private DBForeignKey 			user_id;			
-	private DBDate 					login_date;			// YYYY-MM-DD HH24-MM-SS
-	private DBEnum<E_LOGIN_STATUS> 	login_status;		// [SUCCESS|FAILED_USERNAME|FAILED_MAX_ATTEMPTS|FAILED_NOT_ACTIVE]
-	private DBEnum<E_LOGIN_METHOD>	login_method;
-	private DBString 				gps_coordinates;	// picked up from the Xavia, to determine entry gate				
+	private DBForeignKey 	xavia_id;			
+	private DBForeignKey 	user_id;			
+	private DBDate 			login_date;			// YYYY-MM-DD HH24-MM-SS
+	private DBEnum 			login_status;		// E_LOGIN_STATUS
+	private DBEnum			login_method;		// E_LOGIN_METHOD
+	private DBString 		gps_coordinates;	// picked up from the Xavia, to determine entry gate				
 
 //	public void onCreate () {
 //		sql = "create table login ("
@@ -39,20 +39,20 @@ public class tblLogin extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public DBForeignKey getXavia_id() {
-		return xavia_id;
+	public int getXavia_id() {
+		return xavia_id.getVal();
 	}
 
-	public void setXavia_id(DBForeignKey xavia_id) {
-		this.xavia_id = xavia_id;
+	public void setXavia_id(int xavia_id) {
+		this.xavia_id.setVal(xavia_id);
 	}
 
-	public DBForeignKey getUser_id() {
-		return user_id;
+	public int getUser_id() {
+		return user_id.getVal();
 	}
 
-	public void setUser_id(DBForeignKey user_id) {
-		this.user_id = user_id;
+	public void setUser_id(int user_id) {
+		this.user_id.setVal(user_id);
 	}
 
 	public DBDate getLogin_date() {
@@ -67,22 +67,30 @@ public class tblLogin extends ScanTableBase implements IModel {
 		this.login_date = login_date;
 	}
 
-	public E_LOGIN_STATUS getLogin_status() {
-		return login_status;
-	}
-
-	public void setLogin_status(E_LOGIN_STATUS login_status) {
-		this.login_status = login_status;
-	}
-
 	public E_LOGIN_METHOD getLogin_method() {
-		return login_method;
+		final Class<E_LOGIN_METHOD> enumClass = E_LOGIN_METHOD.class;
+		
+		return (E_LOGIN_METHOD) login_method.getVal(enumClass);
 	}
 
-	public void setLogin_method(E_LOGIN_METHOD login_method) {
-		this.login_method = login_method;
+	public void setLogin_method(E_LOGIN_METHOD newVal) {
+		final Class<E_LOGIN_METHOD> enumClass = E_LOGIN_METHOD.class;
+
+		this.login_method.setVal(enumClass, newVal);
+	}	
+	
+	public E_LOGIN_STATUS getLogin_status() {
+		final Class<E_LOGIN_STATUS> enumClass = E_LOGIN_STATUS.class;
+		
+		return (E_LOGIN_STATUS) login_status.getVal(enumClass);
 	}
 
+	public void setLogin_status(E_LOGIN_STATUS newVal) {
+		final Class<E_LOGIN_STATUS> enumClass = E_LOGIN_STATUS.class;
+
+		this.login_status.setVal(enumClass, newVal);
+	}	
+	
 	public String getGps_coordinates() {
 		return gps_coordinates.getVal();
 	}

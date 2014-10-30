@@ -1,0 +1,9 @@
+package com.sanparks.scanDB;
+
+public enum E_ID_TYPE {
+	ID_TYPE_RSA_ID,
+	ID_TYPE_PASSPORT,
+	ID_TYPE_DRIVERS_LICENCE,
+	ID_TYPE_ACCESS_CARD,
+	ID_TYPE_BIOMETRIC;
+}

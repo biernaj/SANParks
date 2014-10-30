@@ -1,12 +1,14 @@
 package com.sanparks.scanDB;
 
+import java.text.ParseException;
+
 import com.memtrip.sqlking.schema.*;
 
 public abstract class ScanTableBase 
 	{
 	// Fields common to all tables
 	protected	DBRecordID		id;
-	protected	E_DB_SYNCH		synch_status;
+	protected	DBEnum 			synch_status;	// E_DB_SYNCH		
 	protected	DBDate			synch_date;
 	
 //	public abstract int add		(); 
@@ -33,31 +35,33 @@ public abstract class ScanTableBase
 	
 	//......record field methods
 	
-	public DBRecordID getId() 
+	public int getId() 
 	{
-		return id;
+		return id.getVal();
 	}
 
-	protected void setId(DBRecordID id) 
+	protected void setId(int id) 
 	{
-		this.id = id;
+		this.id.setVal(id);
 	}
 
-	public E_DB_SYNCH get_record_synch_status() 
-	{
-		return this.synch_status;
+	public E_DB_SYNCH getSynch_status() {
+		final Class<E_DB_SYNCH> enumClass = E_DB_SYNCH.class;
+		
+		return (E_DB_SYNCH) synch_status.getVal(enumClass);
 	}
 
-	public void setRecord_synch_status(E_DB_SYNCH record_synch_status) 
-	{
-		this.synch_status = record_synch_status;
+	public void setSynch_status(E_DB_SYNCH newVal) {
+		final Class<E_DB_SYNCH> enumClass = E_DB_SYNCH.class;
+
+		this.synch_status.setVal(enumClass, newVal);
+	}	
+	
+	public String getSynch_date() {
+		return synch_date.getValString();
 	}
 
-	public DBDate getSynch_date() {
-		return synch_date;
-	}
-
-	public void setSynch_date(DBDate synch_date) {
-		this.synch_date = synch_date;
+	public void setSynch_date(String synch_date) throws ParseException {
+		this.synch_date.setVal(synch_date);
 	}
 }

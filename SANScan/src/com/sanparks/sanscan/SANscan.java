@@ -75,6 +75,7 @@ public class SANscan extends Application {
 		} catch( final IOException e ) {
 		} catch( final License.BadLicenseException e ) {
 		}
+		Log.v( SANscan.TAG, "onCreate() - Finished" );
 	}
 		
 	@Override

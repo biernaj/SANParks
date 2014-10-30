@@ -13,19 +13,19 @@ import android.content.Context;
 public class ScanDB {
 	
 	private IModel[] modelArray = new IModel[] {
-//			new tblAuditLog(),
-//			new tblEntry(),
-//			new tblImage(),
-//			new tblLogin(),
-//			new tblMapUser2Role(),
-//			new tblMapVehicle2Entry(),
-//			new tblMapVisitor2Entry(),
-//			new tblMapWeapon2Entry(),
-//			new tblUser(),
-//			new tblUserRole(),
-//			new tblVehicle(),
-//			new tblVisitor(),
-//			new tblWeapon(),
+			new tblAuditLog(),
+			new tblEntry(),
+			new tblImage(),
+			new tblLogin(),
+			new tblMapUser2Role(),
+			new tblMapVehicle2Entry(),
+			new tblMapVisitor2Entry(),
+			new tblMapWeapon2Entry(),
+			new tblUser(),
+			new tblUserRole(),
+			new tblVehicle(),
+			new tblVisitor(),
+			new tblWeapon(),
 			new tblXavia()
 		};
 

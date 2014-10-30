@@ -4,17 +4,17 @@ import com.memtrip.sqlking.base.IColumn;
 
 public class DBRecordID implements IColumn {
 
-	protected int val;
+	protected int _id;
 	
 	public int getVal() {
-		return val;
+		return _id;
 	}
 
 	public String getValString() {
-		return String.valueOf(val);
+		return String.valueOf(_id);
 	}
 	public void setVal(int newVal) {
-		this.val = newVal;
+		this._id = newVal;
 	}
 
 }

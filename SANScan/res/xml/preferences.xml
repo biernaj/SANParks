@@ -4,14 +4,14 @@
     <PreferenceCategory
 		android:title="@string/preference_label_category_recognition_languages">
 		<!-- android:dependency="@string/pref_auto_scan_image" -->
-		<com.abbyy.mobile.ocr4.sample.ListPreferenceMultiSelect android:defaultValue="English"
+		<com.abbyy.sanparks.mobile.ocr4.ListPreferenceMultiSelect android:defaultValue="English"
 		    android:key="@string/key_recognition_languages_ocr"
 		    android:title="@string/preference_title_recognition_languages_ocr"
 		    android:dialogTitle="@string/preference_dialog_recognition_languages_ocr"
 		    android:summary="@string/preference_summary_recognition_languages_ocr"
 		    android:entries="@array/pref_recognition_languages_ocr_default_entries"
 		    android:entryValues="@array/pref_recognition_languages_ocr_default_values" />
-		<com.abbyy.mobile.ocr4.sample.ListPreferenceMultiSelect android:defaultValue="English"
+		<com.abbyy.sanparks.mobile.ocr4.ListPreferenceMultiSelect android:defaultValue="English"
 		    android:key="@string/key_recognition_languages_bcr"
 		    android:title="@string/preference_title_recognition_languages_bcr"
 		    android:dialogTitle="@string/preference_dialog_recognition_languages_bcr"

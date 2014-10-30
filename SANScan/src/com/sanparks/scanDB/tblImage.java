@@ -49,8 +49,8 @@ public class tblImage extends ScanTableBase implements IModel{
 		return table_id.getVal();
 	}
 
-	public void setTable_id(DBForeignKey table_id) {
-		this.table_id = table_id;
+	public void setTable_id(int table_id) {
+		this.table_id.setVal(table_id);
 	}
 
 	public String getImg_date() {
