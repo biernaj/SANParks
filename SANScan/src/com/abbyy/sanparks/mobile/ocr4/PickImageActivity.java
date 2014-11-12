@@ -27,8 +27,8 @@ public class PickImageActivity extends NoSearchActivity {
 	/** Logging tag. */
 	public static final String TAG = "PickImageActivity";
 
-	public static final String KEY_IMAGE_URI = "com.abbyy.mobile.ocr4.IMAGE_URI";
-	public static final String KEY_FROM_CAMERA = "com.abbyy.mobile.ocr4.FROM_CAMERA";
+	public static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.IMAGE_URI";
+	public static final String KEY_FROM_CAMERA = "com.abbyy.sanparks.mobile.ocr4.FROM_CAMERA";
 
 	/** A request code for picking image from a gallery. */
 	public static final int REQUEST_CODE_OPEN_PHOTO = 1;

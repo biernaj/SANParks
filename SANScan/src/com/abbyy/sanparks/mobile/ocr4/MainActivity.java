@@ -36,8 +36,8 @@ public class MainActivity extends ActivityBase {
 		CAMERA
 	}
 
-	public static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.sample.IMAGE_URI";
-	private static final String KEY_IMAGE_SOURCE = "com.abbyy.sanparks.mobile.ocr4.sample.IMAGE_SOURCE";
+	public static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.IMAGE_URI";
+	private static final String KEY_IMAGE_SOURCE = "com.abbyy.sanparks.mobile.ocr4.IMAGE_SOURCE";
 
 	private static final int DIALOG_ERROR_LOADING_IMAGE = 0;
 	private static final int DIALOG_SELECT_IMAGE_SOURCE = 1;

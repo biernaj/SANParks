@@ -21,8 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abbyy.mobile.ocr4.License;
-//import com.abbyy.sanparks.mobile.ocr4.MainActivity;
 import com.abbyy.sanparks.mobile.ocr4.PickImageActivity;
 import com.abbyy.sanparks.mobile.ocr4.RecognitionContext.RecognitionTarget;
 

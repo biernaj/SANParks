@@ -3,7 +3,7 @@ package com.sanparks.sanscan;
 import java.io.File;
 
 import com.abbyy.mobile.ocr4.License;
-import com.abbyy.sanparks.mobile.ocr4.MainActivity;
+import com.abbyy.sanparks.mobile.ocr4.ActivityBase;
 import com.abbyy.sanparks.mobile.ocr4.PickImageActivity;
 import com.abbyy.sanparks.mobile.ocr4.RecognitionActivity;
 import com.abbyy.sanparks.mobile.ocr4.RecognitionContext;
@@ -12,7 +12,6 @@ import com.sanparks.scanDB.tblXavia;
 import com.sanparks.sanscan.util.SystemUiHider;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,9 +22,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-//import android.os.Handler;
-//import android.view.MotionEvent;
-import android.view.View;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.support.v4.app.NavUtils;
@@ -36,7 +32,7 @@ import android.support.v4.app.NavUtils;
  * 
  * @see SystemUiHider
  */
-public class WizardEntryActivity extends Activity
+public class WizardEntryActivity extends ActivityBase 
 	{
 	protected final String TAG = WizardEntryActivity.class.getName();
 
@@ -47,8 +43,8 @@ public class WizardEntryActivity extends Activity
 		CAMERA
 		}
 
-	public static final String KEY_IMAGE_URI = "com.abbyy.mobile.ocr4.IMAGE_URI";
-	private static final String KEY_IMAGE_SOURCE = "com.abbyy.mobile.ocr4.IMAGE_SOURCE";
+	public static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.IMAGE_URI";
+	private static final String KEY_IMAGE_SOURCE = "com.abbyy.sanparks.mobile.ocr4.IMAGE_SOURCE";
 	
 	private static final int DIALOG_ERROR_LOADING_IMAGE = 0;
 	private static final int DIALOG_SELECT_IMAGE_SOURCE = 1;
@@ -108,14 +104,17 @@ public class WizardEntryActivity extends Activity
 		
 		setupActionBar();
 
-		if( !initialize( savedInstanceState ) ) 
+		if( License.isLoaded() ) 
 			{
-			Log.w( TAG, "Failed to initialize Imaging" );
-			finish();
-			return;
+			if( !initialize( savedInstanceState ) ) 
+				{
+				Log.w( TAG, "Failed to initialize Imaging" );
+				finish();
+				return;
+				}
 			}
-
-		_imagePreview = (ImageView) findViewById( R.id.image_preview );
+		
+//		_imagePreview = (ImageView) findViewById( R.id.image_ );
 //		if( _imageUri == null ) 
 //			{
 //			// On first boot we get image from resources.
@@ -371,7 +370,7 @@ void unloadData() {
 		{
 		if( savedInstanceState != null ) 
 			{
-			_imageUri = savedInstanceState.getParcelable( MainActivity.KEY_IMAGE_URI );
+			_imageUri = savedInstanceState.getParcelable( KEY_IMAGE_URI );
 			_image = (Bitmap) getLastNonConfigurationInstance();
 			_imageSource = (ImageSource) savedInstanceState.getSerializable( KEY_IMAGE_SOURCE );
 	

@@ -321,6 +321,7 @@ public final class RecognitionActivity extends NoSearchActivity {
 
 			_isRecognizing = true;
 		}
+		Log.v( RecognitionActivity.TAG, "startRecognition() - " + String.valueOf(_isRecognizing));
 	}
 
 	private void stopRecognition() 
@@ -337,8 +338,8 @@ public final class RecognitionActivity extends NoSearchActivity {
 
 	private void dispatchRecognitionProgress( final int progress ) {
 		_recognitionProgress = progress;
-		_progressBar.setProgress( progress );
 		Log.v(RecognitionActivity.TAG, "Progress" + String.valueOf(progress));
+		_progressBar.setProgress( progress );
 	}
 
 	private void dispatchRecognitionSucceeded( final Object result ) {

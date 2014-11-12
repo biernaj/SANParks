@@ -33,27 +33,27 @@ public class RecognitionService extends IntentService implements RecognitionCall
 	private static final String TAG = "RecognitionService";
 
 	public static final String ACTION_STOP_RECOGNITION =
-			"com.abbyy.mobile.ocr4.sample.action.STOP_RECOGNITION";
+			"com.abbyy.sanparks.mobile.ocr4.action.STOP_RECOGNITION";
 	public static final String ACTION_RECOGNITION_PROGRESS =
-			"com.abbyy.mobile.ocr4.sample.action.RECOGNITION_PROGRESS";
+			"com.abbyy.sanparks.mobile.ocr4.action.RECOGNITION_PROGRESS";
 	public static final String ACTION_PREBUILT_WORDS_INFO =
-			"com.abbyy.mobile.ocr4.sample.action.PREBUILT_WORDS_INFO";
+			"com.abbyy.sanparks.mobile.ocr4.action.PREBUILT_WORDS_INFO";
 	public static final String ACTION_ROTATION_TYPE_DETECTED =
-			"com.abbyy.mobile.ocr4.sample.action.ROTATION_TYPE_DETECTED";
+			"com.abbyy.sanparks.mobile.ocr4.action.ROTATION_TYPE_DETECTED";
 
 	public static final String EXTRA_RECOGNITION_PROGRESS =
-			"com.abbyy.mobile.ocr4.sample.RECOGNITION_PROGRESS";
+			"com.abbyy.sanparks.mobile.ocr4.RECOGNITION_PROGRESS";
 	public static final String EXTRA_PREBUILT_WORDS_INFO =
-			"com.abbyy.mobile.ocr4.sample.EXTRA_PREBUILT_WORDS_INFO";
-	public static final String EXTRA_THROWABLE_CLASS = "com.abbyy.mobile.ocr4.sample.THROWABLE_CLASS";
-	public static final String EXTRA_THROWABLE_PROXY = "com.abbyy.mobile.ocr4.sample.THROWABLE_PROXY";
-	public static final String EXTRA_RECOGNITION_RESULT = "com.abbyy.mobile.ocr4.sample.RECOGNITION_RESULT";
-	public static final String EXTRA_RECOGNITION_TARGET = "com.abbyy.mobile.ocr4.sample.RECOGNITION_TARGET";
+			"com.abbyy.sanparks.mobile.ocr4.EXTRA_PREBUILT_WORDS_INFO";
+	public static final String EXTRA_THROWABLE_CLASS = "com.abbyy.sanparks.mobile.ocr4.THROWABLE_CLASS";
+	public static final String EXTRA_THROWABLE_PROXY = "com.abbyy.sanparks.mobile.ocr4.THROWABLE_PROXY";
+	public static final String EXTRA_RECOGNITION_RESULT = "com.abbyy.sanparks.mobile.ocr4.RECOGNITION_RESULT";
+	public static final String EXTRA_RECOGNITION_TARGET = "com.abbyy.sanparks.mobile.ocr4.RECOGNITION_TARGET";
 
 	/** Key which is used to transfer recognized image path to the service. */
-	private static final String KEY_IMAGE_URI = "com.abbyy.mobile.ocr4.sample.IMAGE_URI";
+	private static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.IMAGE_URI";
 	/** Key which is used to transfer {@link PendingIntent} to the service. */
-	private static final String KEY_PENDING_RESULT = "com.abbyy.mobile.ocr4.sample.PENDING_RESULT";
+	private static final String KEY_PENDING_RESULT = "com.abbyy.sanparks.mobile.ocr4.PENDING_RESULT";
 
 	private BroadcastReceiver _receiver;
 
@@ -70,7 +70,7 @@ public class RecognitionService extends IntentService implements RecognitionCall
 
 	/**
 	 * Start {@link RecognitionService} service.
-	 * 
+	 *
 	 * @param context
 	 *            The context from which the start is being carried out.
 	 * @param imageUri
@@ -165,11 +165,11 @@ public class RecognitionService extends IntentService implements RecognitionCall
 
 		return false;
 	}
-	
+
 	@Override
 	public void onRotationTypeDetected( final RotationType rotationType ) {
 		RecognitionContext.setRotationType( rotationType );
-		
+
 		final Intent intent =
 				new Intent( RecognitionService.ACTION_ROTATION_TYPE_DETECTED )
 						.setPackage( getPackageName() );
@@ -187,7 +187,7 @@ public class RecognitionService extends IntentService implements RecognitionCall
 
 	/**
 	 * Initialize started service.
-	 * 
+	 *
 	 * @param intent
 	 *            {@link Intent} object delivered to the service.
 	 * @return {@code true} if the initialization succeed {@code false} otherwise.
@@ -213,7 +213,7 @@ public class RecognitionService extends IntentService implements RecognitionCall
 		} else {
 			recognitionConfiguration.setImageResolution( 0 );
 		}
-		
+
 		int imageProcessingOptions = RecognitionConfiguration.ImageProcessingOptions.PROHIBIT_VERTICAL_CJK_TEXT;
 		if( RecognitionContext.shouldDetectPageOrientation() ) {
 			imageProcessingOptions |= RecognitionConfiguration.ImageProcessingOptions.DETECT_PAGE_ORIENTATION;
@@ -225,9 +225,9 @@ public class RecognitionService extends IntentService implements RecognitionCall
 			imageProcessingOptions |= RecognitionConfiguration.ImageProcessingOptions.BUILD_WORDS_INFO;
 		}
 		recognitionConfiguration.setImageProcessingOptions( imageProcessingOptions );
-		
+
 		recognitionConfiguration.setRecognitionMode( RecognitionContext.getRecognitionMode() );
-		
+
 		recognitionConfiguration.setRecognitionLanguages( RecognitionContext
 				.getRecognitionLanguages( recognitionTarget ) );
 
@@ -235,7 +235,7 @@ public class RecognitionService extends IntentService implements RecognitionCall
 				Engine.getInstance().getRecognitionManager( recognitionConfiguration );
 
 		final Bitmap image = RecognitionContext.getImage( this._imageUri );
-		
+
 		RecognitionContext.setRotationType( RotationType.NO_ROTATION ); // Reset the stored rotation type value
 
 		try {

@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".RecognitionService" />
+        <service android:name="com.abbyy.sanparks.mobile.ocr4.RecognitionService" />
 
         <activity
             android:name=".EntryListActivity"
@@ -78,13 +78,13 @@
                 android:value="com.sanparks.sanscan.CheckDetailActivity" />
         </activity>
         <activity
-            android:name="com.abby.sanparks.mobile.ocr4.PreferencesActivity"
+            android:name="com.abbyy.sanparks.mobile.ocr4.PreferencesActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity
             android:name="com.abbyy.sanparks.mobile.ocr4.RecognitionActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity
-            android:name="com.abby.sanparks.mobile.ocr4.ProcessResultsActivity"
+            android:name="com.abbyy.sanparks.mobile.ocr4.ProcessResultsActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity
             android:name=".WizardEntryActivity"
