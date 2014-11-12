@@ -70,7 +70,7 @@ public class SQLProvider implements Closeable {
 	}
 	
 	/**
-	 * Updates the row associated with the provided baseModeland the whereClause provided
+	 * Updates the row associated with the provided baseModel and the whereClause provided
 	 * @param	columnValuePairs	The column values to update
 	 * @param	whereClause	The condition of the update
 	 * @param 	whereArgs	The condition arguments
@@ -298,5 +298,9 @@ public class SQLProvider implements Closeable {
 	@Override
 	public void close() throws IOException {
 		mDatabase.close();
+	}
+	
+	public void initModelCursorMap (IModel table) {
+		
 	}
 }

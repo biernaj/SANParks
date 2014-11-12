@@ -1,0 +1,109 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#124325"
+    tools:context=".WizardEntryAircraftDetailActivity" >
+
+    <RelativeLayout
+        android:id="@+id/activity_entry_wizard_page_aircraft_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <CheckBox
+            android:id="@+id/check_pilot_id_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/editPilot_id_number"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/textViewAircraftRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/buttonScanAircraftRegistration"
+            android:text="@string/title_aircraft_registration"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editText_aircraft_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewAircraftRegistration"
+            android:ems="10"
+            android:hint="@string/hint_edit_aircraft_registration"
+            android:inputType="textCapCharacters" />
+
+        <TextView
+            android:id="@+id/labelIdNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/button1"
+            android:labelFor="@+id/editPilot_id_number"
+            android:text="@string/title_id_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editPilot_id_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/labelIdNumber"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/title_scan_pilots_licence" />
+
+        <CheckBox
+            android:id="@+id/checkBoxAircraftRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editText_aircraft_registration"
+            android:layout_alignParentRight="true"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/buttonScanAircraftRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="35dp"
+            android:text="@string/title_scan_aircraft_registration" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        style="?metaButtonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/buttonWizardNext"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:text="@string/button_wizard_next" />
+    </LinearLayout>
+
+</FrameLayout>

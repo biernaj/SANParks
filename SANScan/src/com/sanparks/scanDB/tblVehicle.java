@@ -1,6 +1,7 @@
 package com.sanparks.scanDB;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import com.memtrip.sqlking.base.*;
 import com.memtrip.sqlking.schema.*;
@@ -48,8 +49,27 @@ public class tblVehicle extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
+	@Override
+	public DBPrimaryKey add () {
+		
+		Date today = new Date();
+	
+		setEntry_count(1);
+		setExit_count(0);
+
+		try {
+			setFirst_entry(today.toString());
+			setLast_entry(today.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return super.add();
+	}
+	
+	
 	public DBDate getFirst_entry() {
-		return first_entry;
+		return first_entry.get();
 	}
 
 	public void setFirst_entry(String first_entry) throws ParseException {
@@ -96,8 +116,8 @@ public class tblVehicle extends ScanTableBase implements IModel {
 		this.vehicle_year.setVal(vehicle_year);
 	}
 
-	public String getLast_entry() {
-		return last_entry.getValString();
+	public DBDate getLast_entry() {
+		return last_entry.get();
 	}
 
 	public void setLast_entry(String last_entry) throws ParseException {
@@ -112,11 +132,11 @@ public class tblVehicle extends ScanTableBase implements IModel {
 		this.entry_count.setVal(entry_count);
 	}
 
-	public String getLast_exit() {
-		return last_exit.getValString();
+	public DBDate getLast_exit() {
+		return last_exit.get();
 	}
 
-	public void setLast_exit_date(String last_exit) throws ParseException {
+	public void setLast_exit(String last_exit) throws ParseException {
 		this.last_exit.setVal(last_exit);
 	}
 

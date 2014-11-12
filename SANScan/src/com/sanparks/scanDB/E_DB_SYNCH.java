@@ -5,5 +5,7 @@ public enum E_DB_SYNCH {
 	DB_SYNCHED,
 	DB_SYNCH_STARTED,
 	DB_SYNCH_FAILED,
-	DB_SYNCH_INTERRUPTED
+	DB_SYNCH_INTERRUPTED;
+
+	public final static E_DB_SYNCH values[] = values();
 }

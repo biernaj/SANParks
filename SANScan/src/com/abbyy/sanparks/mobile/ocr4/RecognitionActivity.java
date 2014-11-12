@@ -338,6 +338,7 @@ public final class RecognitionActivity extends NoSearchActivity {
 	private void dispatchRecognitionProgress( final int progress ) {
 		_recognitionProgress = progress;
 		_progressBar.setProgress( progress );
+		Log.v(RecognitionActivity.TAG, "Progress" + String.valueOf(progress));
 	}
 
 	private void dispatchRecognitionSucceeded( final Object result ) {

@@ -5,17 +5,17 @@ import com.memtrip.sqlking.schema.*;
 
 public class tblMapUser2Role extends ScanTableBase implements IModel {
 
-	private DBForeignKey 	xavia_id;
-	private DBForeignKey 	user_id;	 
-	private DBForeignKey 	user_role_id;	
+	private DBForeignKey 	xavia_fk;
+	private DBForeignKey 	user_fk;	 
+	private DBForeignKey 	user_role_fk;	
 	private DBBoolean 		b_active;
 
 //	public void onCreate () {
 //		sql = "create table map_user2role ("
 //				+ "id 				integer primary key autoincrement, "
-//				+ "xavia_id			integer, "
-//				+ "user_id			integer not null, "	 
-//				+ "user_role_id		integer not null, "	
+//				+ "xavia_fk			integer, "
+//				+ "user_fk			integer not null, "	 
+//				+ "user_role_fk		integer not null, "	
 //				+ "b_active			integer "			// Boolean
 //				+ ")";
 //		execSQL(sql);
@@ -34,31 +34,31 @@ public class tblMapUser2Role extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public int getXavia_id() {
-		return xavia_id.getVal();
+	public DBKey getXavia_fk() {
+		return (DBKey) xavia_fk.get();
 	}
 
-	public void setXavia_id(int xavia_id) {
-		this.xavia_id.setVal(xavia_id);
+	public void setXavia_fk(DBKey xavia_fk) {
+		this.xavia_fk.set(xavia_fk);
 	}
 
-	public int getUser_id() {
-		return user_id.getVal();
+	public DBKey getUser_fk() {
+		return (DBKey) user_fk.get();
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id.setVal(user_id);
+	public void setUser_fk(DBKey user_fk) {
+		this.user_fk.set(user_fk);
 	}
 
-	public int getUser_role_id() {
-		return user_role_id.getVal();
+	public DBKey getUser_role_fk() {
+		return (DBKey) user_role_fk.get();
 	}
 
-	public void setUser_role_id(int user_role_id) {
-		this.user_role_id.setVal(user_role_id);
+	public void setUser_role_fk(DBKey user_role_fk) {
+		this.user_role_fk.set(user_role_fk);
 	}
 
-	public boolean isB_active() {
+	public boolean getB_active() {
 		return b_active.isVal();
 	}
 

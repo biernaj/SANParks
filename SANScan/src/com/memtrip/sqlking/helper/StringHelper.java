@@ -107,8 +107,12 @@ public class StringHelper {
 	 * @return	The methodName with the first 3 characters remove and the first character lowercase
 	 */
 	public static String removeGetOrSetFromMethodName(String methodName) {
-		String fixedMethodName = methodName.substring(3);
-		return firstCharacterToCase(fixedMethodName,false);
+		String fixedMethodName = methodName;
+
+		if (fixedMethodName.length() > 3)
+			return firstCharacterToCase(methodName.substring(3),false);
+		else
+			return fixedMethodName;
 	}
 	
 	/**

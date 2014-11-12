@@ -20,7 +20,7 @@
     </fragment>
 
         <Button
-            android:id="@+id/add_weapon"
+            android:id="@+id/add_entry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

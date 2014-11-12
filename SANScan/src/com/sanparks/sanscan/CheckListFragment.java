@@ -8,13 +8,7 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-//import com.sanparks.scanDB.DBForeignKey;
-//import com.sanparks.scanDB.E_ENTRY_MODE;
-import com.sanparks.scanDB.ScanDB;
-import com.sanparks.scanDB.tblEntry;
 
 /**
  * A list fragment representing a list of Checks. This fragment also supports
@@ -85,11 +79,11 @@ public class CheckListFragment extends ListFragment {
 
 		if (activityContext != null)
 		{
-			tblEntry[] recArray = ScanDB.getEntryList("entry_date DESC", "0,10");		
-
-			setListAdapter(new ArrayAdapter<tblEntry>(getActivity(),
-					R.layout.fragment_check_list,
-					android.R.id.text1, recArray));
+//			tblEntry[] recArray = tblEntry.getAll("entry_date DESC", "0,10");		
+//
+//			setListAdapter(new ArrayAdapter<tblEntry>(getActivity(),
+//					R.layout.fragment_check_list,
+//					android.R.id.text1, recArray));
 		}
 	}
 

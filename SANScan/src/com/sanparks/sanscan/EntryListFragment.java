@@ -69,11 +69,16 @@ public class EntryListFragment extends ListFragment {
 
 		if (activityContext != null)
 		{
-			tblEntry[] recArray = ScanDB.getEntryList("entry_date DESC", "0,10");		
+			tblEntry recArray[] = ScanDB.getEntryList("entry_date DESC", "0,10");		
 			
+			if (recArray.length > 0) {
+			// TODO: add a 'no records found' message 	
+			}
+				
+
 			setListAdapter(new ArrayAdapter<tblEntry>(getActivity(),
-					android.R.layout.simple_list_item_activated_1,
-					android.R.id.text1, recArray));
+							android.R.layout.simple_list_item_activated_1,
+							android.R.id.text1, recArray));
 		}
 		
 	}

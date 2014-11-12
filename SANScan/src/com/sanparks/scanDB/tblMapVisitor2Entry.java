@@ -1,17 +1,16 @@
 package com.sanparks.scanDB;
 
-import com.memtrip.sqlking.base.*;
 import com.memtrip.sqlking.schema.*;
 
-public class tblMapVisitor2Entry extends ScanTableBase implements IModel {
+public class tblMapVisitor2Entry extends ScanTableBase {
 
-	private DBForeignKey 		entry_id;			
-	private DBEnum 				entry_reason; 	// E_ENTRY_REASON
-	private DBEnum 				entry_mode;		// E_ENTRY_MODE
-	private DBForeignKey 		visitor_id;		
-	private DBForeignKey 		visitor_img_id;	
-	private DBForeignKey 		identity_img_id;
-	private DBForeignKey		vehicle_id;
+	private DBForeignKey 		entry_fk;			
+	private E_VISIT_REASON 		entry_reason; 	// E_ENTRY_REASON
+	private E_VISITOR_MODE		entry_mode;		// E_ENTRY_MODE
+	private DBForeignKey 		visitor_fk;		
+	private DBForeignKey 		visitor_img_fk;	
+	private DBForeignKey 		identity_img_fk;
+	private DBForeignKey		vehicle_fk;
 	private DBInteger			visit_duration;			// expected duration (days)
 	private DBString			reservation_number;
 	private DBString 			wildcard_number;
@@ -19,21 +18,21 @@ public class tblMapVisitor2Entry extends ScanTableBase implements IModel {
 //	public void onCreate () {
 //		sql = "create table map_visitor2entry ("		// Allows for multiple entries and entry reasons
 //				+ "id				integer primary key autoincrement,"
-//				+ "entry_id			integer not null,"
+//				+ "entry_fk			integer not null,"
 //				+ "e_entry_reason	text not null,"	// ENUM_ENTRY_REASON
-//				+ "visitor_id		integer not null,"
-//				+ "visitor_img_id	integer not null,"
-//				+ "identity_img_id  integer,"
-//				+ "vehicle_id		integer,"	
+//				+ "visitor_fk		integer not null,"
+//				+ "visitor_img_fk	integer not null,"
+//				+ "identity_img_fk  integer,"
+//				+ "vehicle_fk		integer,"	
 //				+ "visit_duration	integer,"			// expected duration (days)
 //				+ "reservation_number text,"
-//				+ "FOREIGN_KEY(entry_id) 		references entry(id),"
-//				+ "FOREIGN_KEY(visitor_id) 		references visitor(id),"
-//				+ "FOREIGN_KEY(visitor_img_id) 	references image(id),"
-//				+ "FOREIGN_KEY(id_img_id) 		references image(id),"
+//				+ "FOREIGN_KEY(entry_fk) 		references entry(id),"
+//				+ "FOREIGN_KEY(visitor_fk) 		references visitor(id),"
+//				+ "FOREIGN_KEY(visitor_img_fk) 	references image(id),"
+//				+ "FOREIGN_KEY(id_img_fk) 		references image(id),"
 //				+ ");"
-//				+ "create index mv2e_entry_fk 		on map_visitor2entry (entry_id, id);"
-//				+ "create index mv2e_visitor_fk 	on map_visitor2entry (visitor_id);";
+//				+ "create index mv2e_entry_fk 		on map_visitor2entry (entry_fk, id);"
+//				+ "create index mv2e_visitor_fk 	on map_visitor2entry (visitor_fk);";
 //		
 //		execSQL(sql);
 //	}
@@ -51,68 +50,60 @@ public class tblMapVisitor2Entry extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public int getEntry_id() {
-		return entry_id.getVal();
+	public DBKey getEntry_fk() {
+		return (DBKey) entry_fk.get();
 	}
 
-	public void setEntry_id(int entry_id) {
-		this.entry_id.setVal(entry_id);
+	public void setEntry_fk(DBKey entry_fk) {
+		this.entry_fk.set(entry_fk);
 	}
 
-	public int getVisitor_id() {
-		return visitor_id.getVal();
+	public DBKey getVisitor_fk() {
+		return (DBKey) visitor_fk.get();
 	}
 
-	public void setVisitor_id(int visitor_id) {
-		this.visitor_id.setVal(visitor_id);
+	public void setVisitor_fk(DBKey visitor_fk) {
+		this.visitor_fk.set(visitor_fk);
 	}
 
-	public int getVisitor_img_id() {
-		return visitor_img_id.getVal();
+	public DBKey getVisitor_img_fk() {
+		return (DBKey) visitor_img_fk.get();
 	}
 
-	public void setVisitor_img_id(int visitor_img_id) {
-		this.visitor_img_id.setVal(visitor_img_id);
+	public void setVisitor_img_fk(DBKey visitor_img_fk) {
+		this.visitor_img_fk.set(visitor_img_fk);
 	}
 
-	public int getIdentity_img_id() {
-		return identity_img_id.getVal();
+	public DBKey getIdentity_img_fk() {
+		return (DBKey) identity_img_fk.get();
 	}
 
-	public void setIdentity_img_id(int identity_img_id) {
-		this.identity_img_id.setVal(identity_img_id);
+	public void setIdentity_img_fk(DBKey identity_img_fk) {
+		this.identity_img_fk.set(identity_img_fk);
 	}
 
-	public int getVehicle_id() {
-		return vehicle_id.getVal();
+	public DBKey getVehicle_fk() {
+		return (DBKey) vehicle_fk.get();
 	}
 
-	public void setVehicle_id(int vehicle_id) {
-		this.vehicle_id.setVal(vehicle_id);
+	public void setVehicle_fk(DBKey vehicle_fk) {
+		this.vehicle_fk.set(vehicle_fk);
 	}
 
-	public E_ENTRY_REASON getEntry_reason() {
-		final Class<E_ENTRY_REASON> enumClass = E_ENTRY_REASON.class;
-		
-		return (E_ENTRY_REASON) entry_reason.getVal(enumClass);
+	public E_VISIT_REASON getEntry_reason() {
+		return entry_reason;
 	}
 
-	public void setEntry_reason(E_ENTRY_REASON newVal) {
-		final Class<E_ENTRY_REASON> enumClass = E_ENTRY_REASON.class;
-
-		this.entry_reason.setVal(enumClass, newVal);
+	public void setEntry_reason(E_VISIT_REASON newVal) {
+		this.entry_reason = newVal;
 	}	
 
-	public E_ENTRY_MODE getEntry_mode() {
-		final Class<E_ENTRY_MODE> enumClass = E_ENTRY_MODE.class;
-		
-		return (E_ENTRY_MODE) entry_mode.getVal(enumClass);
+	public E_VISITOR_MODE getEntry_mode() {
+		return entry_mode;
 	}
 
-	public void setEntry_mode(E_ENTRY_MODE newVal) {
-		final Class<E_ENTRY_MODE> enumClass = E_ENTRY_MODE.class;
-
-		this.entry_mode.setVal(enumClass, newVal);
+	public void setEntry_mode(E_VISITOR_MODE newVal) {
+		this.entry_mode = newVal;
 	}	
 
 	public int getVisit_duration() {

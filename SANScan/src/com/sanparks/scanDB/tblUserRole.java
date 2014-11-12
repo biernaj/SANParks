@@ -43,7 +43,7 @@ public class tblUserRole extends ScanTableBase implements IModel {
 		this.role_name.setVal(role_name);
 	}
 
-	public boolean isB_admin() {
+	public boolean getB_admin() {
 		return b_admin.isVal();
 	}
 
@@ -51,7 +51,7 @@ public class tblUserRole extends ScanTableBase implements IModel {
 		this.b_admin.setVal(b_admin);
 	}
 
-	public boolean isB_active() {
+	public boolean getB_active() {
 		return b_active.isVal();
 	}
 
@@ -59,7 +59,7 @@ public class tblUserRole extends ScanTableBase implements IModel {
 		this.b_active.setVal(b_active);
 	}
 
-	public boolean isB_create_user() {
+	public boolean getB_create_user() {
 		return b_create_user.isVal();
 	}
 

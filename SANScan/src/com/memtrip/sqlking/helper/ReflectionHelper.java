@@ -51,55 +51,73 @@ public class ReflectionHelper {
 	 * @param	methodName	The methodName that the declared method should be returned for
 	 * @return	The method declaration that matches the methodName
 	 */
-	public static Method getMethod(Class<?> c, String methodName) {
-		Method[] declaredMethods = c.getDeclaredMethods();
-		Method returnMethod = null;
-		
-		for (Method method : declaredMethods) {
-			if (method.getName().equals(methodName)) {
-				returnMethod = method;
-				break;
+	public static Method getMethod(final Class<?> c, String methodName) {
+		Method[] declaredMethods; 
+		Class<?> currentClass = c;
+
+		while (currentClass != null) {
+
+			declaredMethods = currentClass.getDeclaredMethods();
+
+			for (Method method : declaredMethods) {
+				if (method.getName().equals(methodName)) {
+					return method;
+				}
+			currentClass = currentClass.getSuperclass();
 			}
 		}
 		
-		return returnMethod;
+		return null;
 	}
 	
 	/**
-	 * @para	c	The class to get the setter methods from
+	 * @param	c	The class to get the setter methods from
 	 * @return	A HashMap of getter method name/method declaration pairs
 	 */
-	public static HashMap<String,Method> getGetterMethods(Class<?> c) {
+	public static HashMap<String,Method> getGetterMethods(final Class<?> c) {
 		HashMap<String,Method> setterMethods = new HashMap<String,Method>();
-		Method[] declaredMethods = c.getDeclaredMethods();
+		Method[] declaredMethods;
+		Class<?> currentClass = c;
 		
-		for (int i = 0; i < declaredMethods.length; i++) {
-			Method declaredMethod = declaredMethods[i];
-			String methodName = declaredMethod.getName();
-			
-			if (methodName.startsWith(METHOD_GET)) {
-				setterMethods.put(StringHelper.removePrefixFromMethod(methodName,METHOD_GET),declaredMethod);
+		while (currentClass != null) {
+
+			declaredMethods = currentClass.getDeclaredMethods();
+
+			for (int i = 0; i < declaredMethods.length; i++) {
+				String methodName = declaredMethods[i].getName();
+				
+				if (methodName.startsWith(METHOD_GET)) {
+					setterMethods.put(StringHelper.removePrefixFromMethod(methodName,METHOD_GET),declaredMethods[i]);
+				}
 			}
+			currentClass = currentClass.getSuperclass();
 		}
 		
 		return setterMethods;
 	}
 	
 	/**
-	 * @para	c	The class to get the setter methods from
+	 * @param	c	The class to get the setter methods from
 	 * @return	A HashMap of setter method name/method declaration pairs
 	 */
 	public static HashMap<String,Method> getSetterMethods(Class<?> c) {
 		HashMap<String,Method> setterMethods = new HashMap<String,Method>();
-		Method[] declaredMethods = c.getDeclaredMethods();
+		Method[] declaredMethods;
 		
-		for (int i = 0; i < declaredMethods.length; i++) {
-			Method declaredMethod = declaredMethods[i];
-			String methodName = declaredMethod.getName();
-			
-			if (methodName.startsWith(METHOD_SET)) {
-				setterMethods.put(StringHelper.removePrefixFromMethod(methodName,METHOD_SET),declaredMethod);
+		Class<?> currentClass = c;
+		
+		while (currentClass != null)
+			{
+			declaredMethods = currentClass.getDeclaredMethods();
+
+			for (int i = 0; i < declaredMethods.length; i++) {
+				String methodName = declaredMethods[i].getName();
+				
+				if (methodName.startsWith(METHOD_SET)) {
+					setterMethods.put(StringHelper.removePrefixFromMethod(methodName,METHOD_SET),declaredMethods[i]);
+				}
 			}
+			currentClass = currentClass.getSuperclass();
 		}
 		
 		return setterMethods;
@@ -130,14 +148,14 @@ public class ReflectionHelper {
 	 */
 	public static String[] getMethodNamesFromMethods(Method[] methods) {
 		String[] methodNames = null;
+
 		if (methods != null && methods.length > 0) {
 			methodNames = new String[methods.length];
+
 			for (int i = 0; i < methods.length; i++) {
-				String methodName = StringHelper.removeGetOrSetFromMethodName(methods[i].getName());
-				methodNames[i] = methodName;
+				methodNames[i] = StringHelper.removeGetOrSetFromMethodName(methods[i].getName());
 			}
 		}
-		
 		return methodNames;
 	}
 	

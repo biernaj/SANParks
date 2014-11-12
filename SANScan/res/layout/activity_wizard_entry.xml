@@ -1,0 +1,137 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#124325"
+    android:contentDescription="@string/title_wizard_entry_type"
+    tools:context="com.sanparks.sanscan.WizardEntryActivity" >
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+	<RelativeLayout
+	    android:id="@+id/activity_entry_wizard_vehicle_detail"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent" >
+
+	    <TextView
+	        android:id="@+id/textViewVisitReasonLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/spinnerEntryMode"
+	        android:text="@string/title_visit_reason"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	    <Spinner
+	        android:id="@+id/spinnerVehicleCategory"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/tvWizardEntryType"
+	        android:entries="@array/entryCategory"
+	        android:focusable="true"
+	        android:focusableInTouchMode="true"
+	        android:tag="@string/title_wizard_entry_type" />
+
+	    <Spinner
+	        android:id="@+id/spinnerEntryMode"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/textViewEntryMode"
+	        android:entries="@array/entryModeVehicle" />
+
+	    <EditText
+	        android:id="@+id/editTextVisitorCount"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textViewVisitorCountLabel"
+	        android:layout_alignBottom="@+id/textViewVisitorCountLabel"
+	        android:layout_alignParentRight="true"
+	        android:layout_toRightOf="@+id/textViewVisitorCountLabel"
+	        android:ems="10"
+	        android:inputType="number" />
+
+	    <CheckBox
+	        android:id="@+id/checkBoxWeaponsPresent"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textViewEntryMode"
+	        android:layout_below="@+id/spinnerVisitReason"
+	        android:text="@string/title_weapons_present" />
+
+	    <TextView
+	        android:id="@+id/textViewVisitorCountLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/spinnerVehicleCategory"
+	        android:labelFor="@+id/editTextVisitorCount"
+	        android:text="@string/title_number_of_visitors"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	    <TextView
+	        android:id="@+id/textViewEntryMode"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/editTextVisitorCount"
+	        android:layout_marginTop="16dp"
+	        android:labelFor="@+id/spinnerEntryMode"
+	        android:text="@string/title_mode_of_transport"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	    <Spinner
+	        android:id="@+id/spinnerVisitReason"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textViewVisitReasonLabel"
+	        android:entries="@array/visitReason" />
+
+	    <TextView
+	        android:id="@+id/tvWizardEntryType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginTop="54dp"
+	        android:labelFor="@+id/spinnerVehicleCategory"
+	        android:text="@string/title_wizard_entry_type"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	</RelativeLayout>
+
+	<LinearLayout
+	          android:id="@+id/fullscreen_content_controls"
+	          style="?metaButtonBarStyle"
+	          android:layout_width="match_parent"
+	          android:layout_height="wrap_content"
+	          android:layout_gravity="bottom|center_horizontal"
+	          android:background="@color/black_overlay"
+	          android:orientation="horizontal"
+	          tools:ignore="UselessParent" >
+	
+	          <Button
+	              android:id="@+id/buttonWizardNext"
+	              style="?metaButtonBarButtonStyle"
+	              android:layout_width="0dp"
+	              android:layout_height="wrap_content"
+	              android:layout_weight="1"
+	              android:enabled="true"
+	              android:text="@string/button_wizard_next" />
+	
+	      </LinearLayout>
+
+</FrameLayout>

@@ -1,22 +1,22 @@
 package com.sanparks.scanDB;
 
 import com.memtrip.sqlking.base.*;
-import com.memtrip.sqlking.schema.DBForeignKey;
+import com.memtrip.sqlking.schema.*;
 
 public class tblMapWeapon2Entry extends ScanTableBase implements IModel{
 
-	private DBForeignKey 		entry_id;			
-	private DBForeignKey 		weapon_id;		
+	private DBForeignKey 		entry_fk;			
+	private DBForeignKey 		weapon_fk;		
 	
 //	public void onCreate () {
 //		sql = "create table map_weapon2entry ("		// Allows for multiple entries and entry reasons
 //				+ "id				integer primary key autoincrement,"
-//				+ "entry_id			integer not null,"
-//				+ "FOREIGN_KEY(entry_id) 		references entry(id),"
-//				+ "FOREIGN_KEY(weapon_id) 		references weapon(id),"
+//				+ "entry_fk			integer not null,"
+//				+ "FOREIGN_KEY(entry_fk) 		references entry(id),"
+//				+ "FOREIGN_KEY(weapon_fk) 		references weapon(id),"
 //				+ ");"
-//				+ "create index mw2e_entry_fk 	on map_weapon2entry (entry_id, id);"
-//				+ "create index mw2e_weapon_fk 	on map_weapon2entry (weapon_id);";
+//				+ "create index mw2e_entry_fk 	on map_weapon2entry (entry_fk, id);"
+//				+ "create index mw2e_weapon_fk 	on map_weapon2entry (weapon_fk);";
 //		
 //		execSQL(sql);
 //	}
@@ -34,20 +34,20 @@ public class tblMapWeapon2Entry extends ScanTableBase implements IModel{
 //		return 0;
 //	}
 
-	public int getEntry_id() {
-		return entry_id.getVal();
+	public DBKey getEntry_fk() {
+		return (DBKey) entry_fk.get();
 	}
 
-	public void setEntry_id(int entry_id) {
-		this.entry_id.setVal(entry_id);
+	public void setEntry_fk(DBKey entry_fk) {
+		this.entry_fk.set(entry_fk);
 	}
 
-	public int getWeapon_id() {
-		return weapon_id.getVal();
+	public DBKey getWeapon_fk() {
+		return (DBKey) weapon_fk.get();
 	}
 
-	public void setWeapon_id(int weapon_id) {
-		this.weapon_id.setVal(weapon_id);
+	public void setWeapon_fk(DBKey weapon_fk) {
+		this.weapon_fk.set(weapon_fk);
 	}
 
 

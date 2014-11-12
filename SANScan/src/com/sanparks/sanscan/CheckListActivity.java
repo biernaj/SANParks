@@ -46,6 +46,11 @@ public class CheckListActivity extends Activity implements CheckListFragment.Cal
 					R.id.check_list_container)).setActivateOnItemClick(true);
 		}
 
+		if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                .add(R.id.check_list_container, new CheckListFragment()).commit();
+        }
+
 		// TODO: If exposing deep links into your app, handle intents here.
 	}
 

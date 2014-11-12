@@ -2,12 +2,11 @@ package com.sanparks.scanDB;
 
 import java.text.ParseException;
 
-import com.memtrip.sqlking.base.*;
 import com.memtrip.sqlking.schema.*;
 
-public class tblAuditLog extends ScanTableBase implements IModel {
+public class tblAuditLog extends ScanTableBase {
 
-	private DBForeignKey 	xavia_id;	
+	private DBForeignKey 	xavia_fk;	
 	private DBDate 			log_date; 	// YYYY-MM-DD HH24:MM:SS.SSSS
 	private DBInteger		log_code;	// 
 	private DBInteger  		log_level;	
@@ -24,26 +23,13 @@ public class tblAuditLog extends ScanTableBase implements IModel {
 //				+ ")";
 //		execSQL(sql);
 //	}
-//
-//	@Override
-//	public int add() {
-//		return 0;
-//	}
-//	@Override
-//	public int update() {
-//		return 0;
-//	}
-//	@Override
-//	public int delete() {
-//		return 0;
-//	}
 
-	public int getXavia_id() {
-		return xavia_id.getVal();
+	public DBKey getXavia_fk() {
+		return (DBKey) xavia_fk.get();
 	}
 
-	public void setXavia_id(int xavia_id) {
-		this.xavia_id.setVal(xavia_id);
+	public void setXavia_fk(DBKey xavia_fk) {
+		this.xavia_fk.set(xavia_fk);
 	}
 
 	public String getLog_date() {

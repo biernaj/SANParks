@@ -60,6 +60,9 @@ public class SQLInitialise {
 	 */
 	private String buildSchemaFromBaseModel(IModel baseModel) {
 		String tableName = ReflectionHelper.getClassName(baseModel);
+
+		Log.v( SQLInitialise.TAG, "buildSchemaFromBaseModel:- '" + tableName + "'");
+		
 		Column[] columns = DatabaseHelper.getSQLColumnFromBaseModel(baseModel);
 
 		String createStatement = StringHelper.buildCreateTableStatement(tableName, columns); 

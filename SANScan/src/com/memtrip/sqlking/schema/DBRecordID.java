@@ -4,17 +4,44 @@ import com.memtrip.sqlking.base.IColumn;
 
 public class DBRecordID implements IColumn {
 
-	protected int _id;
+	protected long _id;
+
+	//.... Constructors
 	
-	public int getVal() {
+	public DBRecordID () {
+		_id = 0;
+	}
+	public DBRecordID (long Id) {
+		_id = Id;
+	}
+	
+	public DBRecordID (DBRecordID Id) {
+		_id = Id.getVal();
+	}
+	
+	//.... Getters
+	
+	public DBRecordID get() {
+		return this;
+	}
+
+	public long getVal() {
 		return _id;
 	}
 
 	public String getValString() {
 		return String.valueOf(_id);
 	}
-	public void setVal(int newVal) {
+
+	//.... Setters
+	
+	public DBRecordID setVal(long newVal) {
 		this._id = newVal;
+		return this;
+	}
+	
+	public DBRecordID set (DBRecordID id) {
+		return setVal(id.getVal());	
 	}
 
 }

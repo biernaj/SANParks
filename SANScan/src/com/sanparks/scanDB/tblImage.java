@@ -8,33 +8,19 @@ import com.memtrip.sqlking.schema.*;
 public class tblImage extends ScanTableBase implements IModel{
 
 	private DBString 		table_name;			// dynamic foreign key table name
-	private DBForeignKey	table_id;			// dynamic foreign key record id
+	private DBForeignKey	table_fk;			// dynamic foreign key record id
 	private DBDate 			img_date;			// YYYY-MM-DD HH24-MM-SS	
-	private DBString 		img_filename;
+	private DBString 		img_filename;		// filename format: entry_id + date_time + check_type
 	private DBBlob			img_data;			// BLOB	
 
 //	public void onCreate () {
 //		sql = "create table image ("
-//				+ "id 				integer primary key autoincrement, "
-//				+ "table_name		text not null, "	// dynamic foreign key table name
-//				+ "table_id			integer not null, " // dynamic foreign key record id
-//				+ "img_date			text not null, "	// YYYY-MM-DD HH24-MM-SS	
+//				+ "id 				integer primary key autoincrement,"
+//				+ "table_name		text not null,"	// dynamic foreign key table name
+//				+ "table_id			integer not null," // dynamic foreign key record id
+//				+ "img_date			text not null,"	// YYYY-MM-DD HH24-MM-SS	
 //				+ "img_filename		text, "
 //				+ "img_data			blob";	
-//		execSQL(sql);
-//	}
-//
-//	@Override
-//	public int add() {
-//		return 0;
-//	}
-//	@Override
-//	public int update() {
-//		return 0;
-//	}
-//	@Override
-//	public int delete() {
-//		return 0;
 //	}
 
 	public String getTable_name() {
@@ -45,12 +31,12 @@ public class tblImage extends ScanTableBase implements IModel{
 		this.table_name.setVal(table_name);
 	}
 
-	public int getTable_id() {
-		return table_id.getVal();
+	public DBKey getTable_fk() {
+		return (DBKey) table_fk.get();
 	}
 
-	public void setTable_id(int table_id) {
-		this.table_id.setVal(table_id);
+	public void setTable_fk(DBKey table_fk) {
+		this.table_fk.set(table_fk);
 	}
 
 	public String getImg_date() {

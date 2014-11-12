@@ -24,21 +24,23 @@ import java.util.Map;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.memtrip.sqlking.base.IModel;
 import com.memtrip.sqlking.schema.*;
-import com.memtrip.sqlking.schema.ORMDataType;
-import com.memtrip.sqlking.schema.SQLDataType;
 
 /**
  * A SQLite database helper class that handles the creation and updating of 
  * database tables. SQL statements that create tables should be defined here,
  * they should then be executed from the onCreate method. Drop queries should also
  * be provided for the database update.
- * @author	memtrip, AdrianVelcich
+ * @author	memtrip, 
+ * @author  AdrianVelcich
  */
 public class DatabaseHelper {
-	/**
+	static String TAG = "DatabaseHelper";
+	
+    /**
 	 * A generic method that takes any class interface that extends BaseModel, it takes the provided
 	 * cursor and populates a new instance of the provided BaseModel interface with the results.
 	 * @param	c	The class interface to return the cursor results in
@@ -58,7 +60,9 @@ public class DatabaseHelper {
 		T[] result = (T[]) Array.newInstance(c, cursor.getCount());
 		// Loop through all the rows in the cursor and execute the appropriate 
 		// sqlModel setter method, this will populate the model object.
+
 		cursor.moveToFirst();
+		
 		for (int i = 0; !cursor.isAfterLast(); i++) {
 			T baseSQLModelObject = (T)ReflectionHelper.newInstance(c);
 			
@@ -95,6 +99,7 @@ public class DatabaseHelper {
 		
 		// loop through the cursor and populate a result map
 		cursor.moveToFirst();
+
 		while (!cursor.isAfterLast()) {
 			Map<String,T> resultMap = new HashMap<String,T>();
 			
@@ -120,19 +125,19 @@ public class DatabaseHelper {
 						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
 						break;
 					
-					case ORMDataType.FIELD_BLOB:
-						resultMap.put(columnName, (T)cursor.getBlob(index));
-						break;
-					
 					case ORMDataType.FIELD_DOUBLE:
 						resultMap.put(columnName, (T)Double.valueOf(cursor.getDouble(index)));
 						break;
 
-					case ORMDataType.FIELD_ENUM:
-						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
+					case ORMDataType.FIELD_BLOB:
+						resultMap.put(columnName, (T)cursor.getBlob(index));
 						break;
 					
-					case ORMDataType.FIELD_PRIMARY_KEY:
+					case ORMDataType.FIELD_DATE:
+						resultMap.put(columnName, (T)Integer.valueOf(cursor.getInt(index)));
+						break;
+					
+					case ORMDataType.FIELD_ENUM:
 						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
 						break;
 					
@@ -140,15 +145,7 @@ public class DatabaseHelper {
 						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
 						break;
 					
-					case ORMDataType.FIELD_DATE:
-						resultMap.put(columnName, (T)Integer.valueOf(cursor.getInt(index)));
-						break;
-					
-					case ORMDataType.FIELD_TIME:
-						resultMap.put(columnName, (T)Integer.valueOf(cursor.getInt(index)));
-						break;
-					
-					case ORMDataType.FIELD_DATETIME:
+					case ORMDataType.FIELD_PRIMARY_KEY:
 						resultMap.put(columnName, (T)Long.valueOf(cursor.getLong(index)));
 						break;
 					
@@ -168,37 +165,80 @@ public class DatabaseHelper {
 	 * @return	The ContentValues object populated from the provided baseModel
 	 */
 	public static ContentValues getContentValuesFromBaseModel(IModel baseModel) {
-		Field[] fields = baseModel.getClass().getDeclaredFields();
+
+		Class<?> 		currentClass = baseModel.getClass();
+		ContentValues 	contentValues = new ContentValues();
+		Field[] 		fields;
 		HashMap<String,Method> getMethods = ReflectionHelper.getGetterMethods(baseModel.getClass());
-		ContentValues contentValues = new ContentValues();
 		
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			String name = field.getName();
-			String type = getSQLDataTypeFromClassRef(field.getType());
-			
-			if (type.equals(SQLDataType.SQL_TEXT)) {
-				contentValues.put(name, (String)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+//		ArrayList<Column> columns = new ArrayList<Column>();
 
-			} else if (type.equals(SQLDataType.SQL_INTEGER)) {
-				contentValues.put(name, ((Integer)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).intValue());
+		while (currentClass != null) {
 
-			} else if (type.equals(SQLDataType.SQL_BOOLEAN)) {
+			fields = currentClass.getDeclaredFields();
+
+			for (int i = 0; i < fields.length; i++) {
+
+				String name = fields[i].getName();
+				String type = getSQLDataTypeFromClassRef(fields[i].getType());
+
+		//...... Wrapped types
+					
+				if (type.equals(SQLDataType.SQL_DB_TEXT)) {
+					contentValues.put(name, (String)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+
+				} else if (type.equals(SQLDataType.SQL_DB_BOOLEAN)) {
 				boolean value = ((Boolean)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).booleanValue();
 				contentValues.put(name, value ? 1 : 0);
 
-			} else if (type.equals(SQLDataType.SQL_LONG)) {
-				contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).longValue());
+				} else if (type.equals(SQLDataType.SQL_DB_DATE)) {
+					contentValues.put(name, ((DBDate)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).getVal());
+	
+				} else if (type.equals(SQLDataType.SQL_DB_ENUM)) {
+					contentValues.put(name, ((Enum<?>)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).ordinal());
 
-			} else if (type.equals(SQLDataType.SQL_ENUM)) {
-				contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).longValue());
+				} else if (type.equals(SQLDataType.SQL_DB_INTEGER)) {
+					contentValues.put(name, ((DBInteger)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).getVal());
 
-			} else if (type.equals(SQLDataType.SQL_REAL)) {
-				contentValues.put(name, ((Double)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).doubleValue());
+				} else if (type.equals(SQLDataType.SQL_DB_LONG)) {
+					contentValues.put(name, ((DBLong)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).getVal());
 
-			} else if (type.equals(SQLDataType.SQL_BLOB)) {
-				contentValues.put(name, (byte[])ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+				} else if (type.equals(SQLDataType.SQL_DB_REAL)) {
+					contentValues.put(name, ((DBReal)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).getVal());
+
+				} else if (type.equals(SQLDataType.SQL_DB_BLOB)) {
+					contentValues.put(name, ((DBBlob)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).getVal());
+
+				} else if (type.equals(SQLDataType.SQL_DB_PRIMARY_KEY)) {
+					contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))));
+
+				} else if (type.equals(SQLDataType.SQL_DB_FOREIGN_KEY)) {
+					contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))));
+
+					//...... Primitive types
+					
+				} else if (type.equals(SQLDataType.SQL_TEXT)) {
+					contentValues.put(name, (String)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+	
+				} else if (type.equals(SQLDataType.SQL_INTEGER)) {
+					contentValues.put(name, ((Integer)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).intValue());
+	
+				} else if (type.equals(SQLDataType.SQL_BOOLEAN)) {
+					boolean value = ((Boolean)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).booleanValue();
+					contentValues.put(name, value ? 1 : 0);
+	
+				} else if (type.equals(SQLDataType.SQL_LONG)) {
+					contentValues.put(name, ((Long)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).longValue());
+	
+				} else if (type.equals(SQLDataType.SQL_REAL)) {
+					contentValues.put(name, ((Double)ReflectionHelper.invokeMethod(baseModel, getMethods.get(name))).doubleValue());
+	
+				} else if (type.equals(SQLDataType.SQL_BLOB)) {
+					contentValues.put(name, (byte[])ReflectionHelper.invokeMethod(baseModel, getMethods.get(name)));
+
+				}
 			}
+			currentClass = currentClass.getSuperclass();
 		}
 		
 		return contentValues;
@@ -206,40 +246,63 @@ public class DatabaseHelper {
 	
 	/**
 	 * Retrieve the column information for the provided BaseModel
-	 * @param	baseModel	The baseModel to retrieve the column information for
+	 * @param	currentClass2	The baseModel to retrieve the column information for
 	 * @return	An array of column information associated with the provided BaseModel
 	 */
-	public static Column[] getSQLColumnFromBaseModel(IModel baseModel) {
-		Field[] fields = baseModel.getClass().getDeclaredFields();
-		Column[] columns = new Column[fields.length];
+	public static Column[] getSQLColumnFromBaseModel(IModel baseModel) 
+		{
+		Class<?> currentClass = baseModel.getClass();
+		Field[] fields;
+		ArrayList<Column> columns = new ArrayList<Column>();
 		
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			Column column = new Column();
-			column.setName(field.getName());
-			column.setType(getSQLDataTypeFromClassRef(field.getType()));
-			columns[i] = column;
+		while (currentClass != null) 
+		{
+			fields = currentClass.getDeclaredFields();
+
+			for (int i = 0; i < fields.length; i++) {
+				Column column = new Column();
+	
+				column.setName(fields[i].getName());
+				Log.v(TAG, "getSQLColumnFromBaseModel:- '" + fields[i].getName() + "'");
+				column.setType(getSQLDataTypeFromClassRef(fields[i].getType()));
+	
+				columns.add(column);
+			}
+			currentClass = currentClass.getSuperclass();
 		}
-		
-		return columns;
-	}
+		Column columnArray[] = new Column[columns.size()];
+		columnArray = columns.toArray(columnArray);
+
+		return columnArray ;
+		}
 	
 	/**
 	 * Retrieve the column names for the provided BaseModel
 	 * @param	baseModel	The baseModel to retrieve the column name for
 	 * @return	An array of column names associated with the provided BaseModel
 	 */
-	public static String[] getSQLColumnNamesFromBaseModel(IModel baseModel) {
-		Field[] fields = baseModel.getClass().getDeclaredFields();
-		String[] columns = new String[fields.length];
-		
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			columns[i] = field.getName();
+	public static String[] getSQLColumnNamesFromBaseModel(IModel baseModel) 
+		{
+		Class<?> currentClass = baseModel.getClass();
+		Field[] fields;
+		ArrayList<String> columns = new ArrayList<String>();
+
+		while (currentClass != null) {
+
+			fields = currentClass.getDeclaredFields();
+			
+			for (int i = 0; i < fields.length; i++) {	
+				columns.add(fields[i].getName());
+				}
+
+			currentClass = currentClass.getSuperclass();
 		}
 		
-		return columns;
-	}
+		String columnNames[] = new String[columns.size()];
+		columnNames = columns.toArray(columnNames);		
+
+		return columnNames;
+		}
 	
 	/**
 	 * Validate the BaseModel to ensure that the properties match the 
@@ -247,27 +310,37 @@ public class DatabaseHelper {
 	 * @param	baseModel	The model to validate
 	 */
 	public static void validateBaseModel(IModel baseModel) {
-		Field[] fields = baseModel.getClass().getDeclaredFields();
-		String[] methodNames = ReflectionHelper.getMethodNamesFromMethods(baseModel.getClass().getDeclaredMethods());
+		Field[] fields;
+		String[] methodNames = null; // ReflectionHelper.getMethodNamesFromMethods(baseModel.getClass().getDeclaredMethods());
+		Class<?> currentClass = baseModel.getClass();
 		
-		for (int i = 0; i < fields.length; i++) {
-			int fieldNameFoundCount = 0;
-			String fieldName = fields[i].getName();
-			
-			for (int x = 0; x < methodNames.length; x++) {
-				if (fieldName.equals(methodNames[x])) {
-					fieldNameFoundCount++;
-					
-					if (fieldNameFoundCount == 2)
-						break;
+		while (currentClass != null) {
+
+			Log.v(TAG, "ValidateBaseModel - " + currentClass.getSimpleName());
+
+			fields = currentClass.getDeclaredFields();
+			methodNames = ReflectionHelper.getMethodNamesFromMethods(currentClass.getDeclaredMethods());
+
+			for (int i = 0; i < fields.length; i++) {
+				int fieldNameFoundCount = 0;
+				String fieldName = fields[i].getName();
+				
+				for (int x = 0; x < methodNames.length; x++) {
+					if (fieldName.equals(methodNames[x])) {
+						fieldNameFoundCount++;
+						
+						if (fieldNameFoundCount == 2)
+							break;
+					}
 				}
+				
+				if (fieldNameFoundCount != 2)
+					throw new IllegalStateException(
+						"\"" + fieldName + "\"->[" + baseModel.getClass().getSimpleName() + "] " + 
+						"does not have an associated get or set method"
+					);
 			}
-			
-			if (fieldNameFoundCount != 2)
-				throw new IllegalStateException(
-					"\"" + fieldName + "\"->[" + baseModel.getClass().getSimpleName() + "] " + 
-					"does not have an associated get or set method"
-				);
+			currentClass = currentClass.getSuperclass();
 		}
 	}
 	
@@ -280,53 +353,62 @@ public class DatabaseHelper {
 	private static String getSQLDataTypeFromClassRef(Class<?> clazz) {
 		String dataType = null;
 		
-		if (clazz.equals(DBString.class)) {
+		// Primitive types
+
+		if (clazz.equals(String.class)) {
 			dataType = SQLDataType.SQL_TEXT;
 
-		} else if (clazz.equals(DBInteger.class)) {
+		} else if (clazz.equals(Integer.class)) {
 			dataType = SQLDataType.SQL_INTEGER;
 		
-		} else if (clazz.equals(DBBoolean.class)) {
+		} else if (clazz.equals(Boolean.class)) {
 			dataType = SQLDataType.SQL_BOOLEAN;
 		
-		} else if (clazz.equals(DBLong.class)) {
+		} else if (clazz.equals(Long.class)) {
 			dataType = SQLDataType.SQL_LONG;
 		
-		} else if (clazz.equals(DBDate.class)) {		
-			dataType = SQLDataType.SQL_LONG;
-		
-		} else if (clazz.equals(DBEnum.class)) {
-			dataType = SQLDataType.SQL_ENUM;
-		
-		} else if (clazz.equals(DBReal.class)) {
+		} else if (clazz.equals(Double.class)) {
 			dataType = SQLDataType.SQL_REAL;
 		
-		} else if (clazz.equals(DBBlob.class)) {
+		} else if (clazz.equals(byte[].class)) {
 			dataType = SQLDataType.SQL_BLOB;
+		
+		// Wrapped types
+			
+		} else if (clazz.equals(DBString.class)) {
+			dataType = SQLDataType.SQL_DB_TEXT;
 
+		} else if (clazz.equals(DBInteger.class)) {
+			dataType = SQLDataType.SQL_DB_INTEGER;
+		
+		} else if (clazz.equals(DBBoolean.class)) {
+			dataType = SQLDataType.SQL_DB_BOOLEAN;
+		
+		} else if (clazz.equals(DBLong.class)) {
+			dataType = SQLDataType.SQL_DB_LONG;
+		
+		} else if (clazz.equals(DBReal.class)) {
+			dataType = SQLDataType.SQL_DB_REAL;
+		
+		} else if (clazz.equals(DBBlob.class)) {
+			dataType = SQLDataType.SQL_DB_BLOB;
+
+		} else if (clazz.equals(DBDate.class)) {		
+			dataType = SQLDataType.SQL_DB_DATE;
+		
+		} else if (clazz.isEnum()) {
+			dataType = SQLDataType.SQL_DB_ENUM;
+		
 		} else if (clazz.equals(DBForeignKey.class)) {
-			dataType = SQLDataType.SQL_INTEGER;
+			dataType = SQLDataType.SQL_DB_FOREIGN_KEY;
 		
 		} else if (clazz.equals(DBPrimaryKey.class)) {
-			dataType = SQLDataType.SQL_INTEGER;
+			dataType = SQLDataType.SQL_DB_PRIMARY_KEY;
+		} else {
+			// TODO: throw an exception if the datatype is not found		
 		}
-
-//		if (clazz.equals(String.class)) {
-//			dataType = SQLDataType.SQL_TEXT;
-//	} else if (clazz.equals(int.class)) {
-//		dataType = SQLDataType.SQL_INTEGER;
-//	} else if (clazz.equals(boolean.class)) {
-//		dataType = SQLDataType.SQL_BOOLEAN;
-//	} else if (clazz.equals(long.class)) {
-//		dataType = SQLDataType.SQL_LONG;
-//	} else if (clazz.isEnum()) {
-//		dataType = SQLDataType.SQL_ENUM;
-//	} else if (clazz.equals(double.class)) {
-//		dataType = SQLDataType.SQL_REAL;
-//	} else if (clazz.equals(byte[].class)) {
-//		dataType = SQLDataType.SQL_BLOB;
-//	}
-		
+			
+	
 		return dataType;
 	}
 	
@@ -339,7 +421,26 @@ public class DatabaseHelper {
 	private static int getORMDataTypeFromClassRef(Class<?> clazz) {
 		int dataType = -1;
 		
-		if (clazz.equals(DBString.class)) {
+			// Primitive Types
+		
+		if (clazz.equals(String.class)) {
+			dataType = ORMDataType.FIELD_STRING;
+
+		} else if (clazz.equals(Integer.class)) {
+			dataType = ORMDataType.FIELD_INTEGER;
+		
+		} else if (clazz.equals(Boolean.class)) {
+			dataType = ORMDataType.FIELD_BOOLEAN;
+		
+		} else if (clazz.equals(Long.class)) {
+			dataType = ORMDataType.FIELD_LONG;
+		
+		} else if (clazz.equals(double.class)) {
+			dataType = ORMDataType.FIELD_DOUBLE;
+
+			// Wrapped Types
+		
+		} else if (clazz.equals(DBString.class)) {
 			dataType = ORMDataType.FIELD_STRING;
 
 		} else if (clazz.equals(DBInteger.class)) {
@@ -352,7 +453,7 @@ public class DatabaseHelper {
 			dataType = ORMDataType.FIELD_LONG;
 		
 		} else if (clazz.equals(DBDate.class)) {
-			dataType = ORMDataType.FIELD_LONG;
+			dataType = ORMDataType.FIELD_DATE;
 		
 		} else if (clazz.equals(DBReal.class)) {
 			dataType = ORMDataType.FIELD_DOUBLE;
@@ -360,7 +461,7 @@ public class DatabaseHelper {
 		} else if (clazz.equals(DBBlob.class)) {
 			dataType = ORMDataType.FIELD_BLOB;
 		
-		} else if (clazz.equals(DBEnum.class)) {
+		} else if (clazz.isEnum()) {
 			dataType = ORMDataType.FIELD_ENUM;
 
 		} else if (clazz.equals(DBForeignKey.class)) {
@@ -370,22 +471,6 @@ public class DatabaseHelper {
 			dataType = ORMDataType.FIELD_PRIMARY_KEY;
 		}
 		
-//		if (clazz.equals(String.class)) {
-//			dataType = ORMDataType.FIELD_STRING;
-//		} else if (clazz.equals(int.class)) {
-//			dataType = ORMDataType.FIELD_INTEGER;
-//		} else if (clazz.equals(boolean.class)) {
-//			dataType = ORMDataType.FIELD_BOOLEAN;
-//		} else if (clazz.equals(long.class)) {
-//			dataType = ORMDataType.FIELD_LONG;
-//		} else if (clazz.equals(double.class)) {
-//			dataType = ORMDataType.FIELD_DOUBLE;
-//		} else if (clazz.equals(byte[].class)) {
-//			dataType = ORMDataType.FIELD_BLOB;
-//		} else if (clazz.isEnum()) {
-//			dataType = ORMDataType.FIELD_ENUM;
-//		}
-		
 		return dataType;
 	}
 	
@@ -394,17 +479,25 @@ public class DatabaseHelper {
 	 * @param	baseModel	The baseModel to get the HashMap from
 	 * @return	A HashMap that contains column name / type key value pairs
 	 */
-	private static HashMap<String,Integer> getColumnNameTypeMap(IModel baseModel) {
+	private static HashMap<String,Integer> getColumnNameTypeMap(IModel baseModel) 
+		{
+		Class<?> currentClass = baseModel.getClass();
 		HashMap<String,Integer> columnNameTypeMap = new HashMap<String,Integer>();
-		Field[] fields = baseModel.getClass().getDeclaredFields();
+		Field[] fields;
 		
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			columnNameTypeMap.put(field.getName(), getORMDataTypeFromClassRef(field.getType()));
-		}
-		
+		while (currentClass != null) 
+			{
+			fields = currentClass.getDeclaredFields();
+			
+			for (int i = 0; i < fields.length; i++) 
+				{
+				columnNameTypeMap.put(fields[i].getName(), getORMDataTypeFromClassRef(fields[i].getType()));
+				}
+			currentClass = currentClass.getSuperclass(); 	
+			}
+
 		return columnNameTypeMap;
-	}
+		}
 
 	/**
 	 * Use reflection to access the setter methods of the baseModel instance, then set
@@ -426,8 +519,6 @@ public class DatabaseHelper {
 				break;
 			
 			case ORMDataType.FIELD_INTEGER:			// Fall thru
-			case ORMDataType.FIELD_PRIMARY_KEY:		// Fall thru
-			case ORMDataType.FIELD_FOREIGN_KEY:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getInt(index));
 				break;
 			
@@ -440,19 +531,27 @@ public class DatabaseHelper {
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
 				break;
 			
+			case ORMDataType.FIELD_DOUBLE:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getDouble(index));
+				break;
+
 			case ORMDataType.FIELD_BLOB:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getBlob(index));
 				break;
 			
-			case ORMDataType.FIELD_DOUBLE:
-				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getDouble(index));
+			case ORMDataType.FIELD_DATE:
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
 				break;
 
 			case ORMDataType.FIELD_ENUM:
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
 				break;
 			
-			case ORMDataType.FIELD_DATE:
+			case ORMDataType.FIELD_FOREIGN_KEY:		
+				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
+				break;
+
+			case ORMDataType.FIELD_PRIMARY_KEY:		
 				ReflectionHelper.invokeMethod(baseSQLModel, executeMethod, cursor.getLong(index));
 				break;
 		}

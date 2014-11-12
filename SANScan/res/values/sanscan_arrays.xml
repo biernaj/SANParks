@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entryCategory">
+        <item>VEHICLE</item>
+        <item>AIRCRAFT</item>
+        <item>OTHER</item>
+    </string-array>
+
+    <string-array name="entryModeVehicle">
+		<item>CAR</item>
+		<item>TAXI</item>
+		<item>BUS</item>
+		<item>VAN</item>
+		<item>TRUCK</item>
+		<item>TRAILER</item>
+		<item>CARAVAN</item>
+		<item>CAMPER</item>
+		<item>MOTORCYCLE</item>
+    </string-array>
+    
+    <string-array name="entryModeAircraft">
+		<item>AIRCRAFT</item>
+		<item>HELICOPTER</item>
+		<item>MICROLIGHT</item>
+		<item>OTHER</item>
+    </string-array>
+    
+    <string-array name="entryModeOther">
+		<item>PEDESTRIAN</item>
+        <item>BICYCLE</item>
+		<item>HORSE</item>
+		<item>CART</item>
+		<item>OTHER</item>
+    </string-array>
+    
+    <string-array name="visitReason">
+		<item>Reservation</item>
+		<item>Day Visit</item>
+		<item>Staff</item>
+		<item>Delivery</item>
+		<item>Research</item>
+		<item>Business</item>
+		<item>Medical</item>
+		<item>OTHER</item>
+    </string-array>
+    
+    <string-array name="visitorMode">
+		<item>DRIVER</item> 
+		<item>PILOT</item>
+		<item>CREW</item>
+		<item>PASSENGER</item>
+		<item>PEDESTRIAN</item>
+		<item>STAFF</item>
+    </string-array>
+
+   	<string-array name="checkType">
+	    <item>Vehicle</item>  
+		<item>Driver/Pilot</item> 
+		<item>Passenger</item>
+		<item>Biometric</item>
+		<item>Weapons</item>
+		<item>Wildcard</item>
+		<item>Reservation</item>
+		<item>Comments</item>
+	</string-array>    
+	
+   	<string-array name="idType">
+		<item>RSA Id</item>
+		<item>Passport</item>
+		<item>Driver\'s licence</item>
+		<item>Access Card</item>
+		<item>Biometric</item>
+   	</string-array>    
+   	    	    
+</resources>

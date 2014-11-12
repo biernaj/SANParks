@@ -4,10 +4,10 @@ import com.memtrip.sqlking.base.IColumn;
 
 public class DBString implements IColumn {
 
-	private String val;
+	protected String val;
 	
 	public String getVal() {
-		return val;
+		return this.val;
 	}
 
 	public void setVal(String val) {

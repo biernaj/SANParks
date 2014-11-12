@@ -1,19 +1,22 @@
 package com.sanparks.sanscan;
 
+import com.sanparks.scanDB.tblXavia;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 /**
  * An activity representing a list of Scan Entries. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
- * presents a list of items, which when touched, lead to a {@link EntryListActivity}. 
+ * presents a list of items, which when touched, lead to a {@link CheckListActivity}. 
  * On tablets, the activity presents the list of items and item details side-by-side 
  * using two vertical panes.
  * <p>
  * The activity makes heavy use of fragments. The list of items is a
  * {@link EntryListFragment} and the item details (if present) is a
- * {@link EntryDetailFragment}.
+ * {@link CheckListFragment}.
  * <p>
  * This activity also implements the required
  * {@link EntryListFragment.Callbacks} interface to listen for item selections.
@@ -29,6 +32,7 @@ public class EntryListActivity extends Activity implements EntryListFragment.Cal
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_entry_list);
 
 		if (findViewById(R.id.check_list_container) != null) {
@@ -44,6 +48,10 @@ public class EntryListActivity extends Activity implements EntryListFragment.Cal
 					R.id.entry_list)).setActivateOnItemClick(true);
 		}
 
+		tblXavia.registerXaviaUnit(this);
+
+
+		
 		// TODO: If exposing deep links into your app, handle intents here.
 	}
 
@@ -76,4 +84,10 @@ public class EntryListActivity extends Activity implements EntryListFragment.Cal
 			startActivity(detailIntent);
 		}
 	}
+	
+	public void cmdAddNewEntry (View view) {
+	    Intent detailIntent = new Intent(this, WizardEntryStartActivity.class);
+	    startActivity(detailIntent);
+	}
+	
 }

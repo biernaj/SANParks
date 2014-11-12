@@ -11,7 +11,7 @@
         android:text="@string/title_scan_drivers_licence" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/labelIdNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/labelIdNumber"
         android:ems="10"
         android:inputType="number"
         android:maxLines="1" >
@@ -35,7 +35,7 @@
     </EditText>
 
     <CheckBox
-        android:id="@+id/check_driver_id_number"
+        android:id="@+id/checkbox_driver_id_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/editDriver_id_number"

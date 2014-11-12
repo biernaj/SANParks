@@ -20,11 +20,23 @@ package com.memtrip.sqlking.schema;
  * @author	memtrip
  */
 public class SQLDataType {
-	public static final String SQL_TEXT = "text";
-	public static final String SQL_INTEGER = "integer";
-	public static final String SQL_BOOLEAN = "boolean";
-	public static final String SQL_LONG = "long";
-	public static final String SQL_REAL = "real";
-	public static final String SQL_BLOB = "blob";
-	public static final String SQL_ENUM = "long";
+	// direct primitive types
+	public static final String SQL_TEXT 	= "text";
+	public static final String SQL_INTEGER 	= "integer";
+	public static final String SQL_BOOLEAN 	= "boolean";
+	public static final String SQL_LONG 	= "long";
+	public static final String SQL_REAL 	= "real";
+	public static final String SQL_BLOB 	= "blob";
+	
+	// Wrapped types
+	public static final String SQL_DB_TEXT 			= "DBString";
+	public static final String SQL_DB_INTEGER 		= "DBInteger";
+	public static final String SQL_DB_BOOLEAN 		= "DBBoolean";
+	public static final String SQL_DB_LONG 			= "DBLong";
+	public static final String SQL_DB_REAL 			= "DBReal";
+	public static final String SQL_DB_BLOB 			= "DBBlob";
+	public static final String SQL_DB_DATE 			= "DBDate";
+	public static final String SQL_DB_ENUM 			= "DBEnum";
+	public static final String SQL_DB_FOREIGN_KEY 	= "DBForeignKey";
+	public static final String SQL_DB_PRIMARY_KEY 	= "DBPrimaryKey";
 }

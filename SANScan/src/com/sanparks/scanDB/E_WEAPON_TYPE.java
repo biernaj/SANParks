@@ -12,6 +12,8 @@ public enum E_WEAPON_TYPE
 	
 	private final int 		val;
 	private final String	name;
+	public final static E_WEAPON_TYPE values[] = values();
+	
 
 	E_WEAPON_TYPE(int Val, String Name) 
 	{

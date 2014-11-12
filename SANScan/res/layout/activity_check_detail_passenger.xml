@@ -2,32 +2,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/passenger_detail_container" >
-    
-    <TextView
-        android:id="@+id/textViewPassengers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/title_passengers"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ListView
-        android:id="@+id/listViewPassengers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonAddPassenger"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewPassengers" >
-
-    </ListView>
-
-    <Button
-        android:id="@+id/buttonAddPassenger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="@string/title_add_passenger" />
-
 </RelativeLayout>

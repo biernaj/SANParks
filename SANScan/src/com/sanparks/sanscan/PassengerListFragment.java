@@ -1,8 +1,5 @@
 package com.sanparks.sanscan;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
@@ -10,9 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 //import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.memtrip.sqlking.schema.DBForeignKey;
-import com.sanparks.scanDB.*;
 
 /**
  * A list fragment representing a list of Checks. This fragment also supports
@@ -84,10 +78,10 @@ public class PassengerListFragment extends ListFragment {
 		if (activityContext != null)
 		{
 			// TODO: Get Current EntryId and VehicleId (if applicable) here			
-			DBForeignKey entryId = null;
-			DBForeignKey vehicleId = null;
+//			DBForeignKey entryId;
+//			DBForeignKey vehicleId;
 			
-			ArrayList<Map<String,Object>> recArray = ScanDB.getEntryVisitorListByEntryMode(entryId, E_ENTRY_MODE.ENTRY_MODE_PASSENGER, vehicleId);		
+//			ArrayList<Map<String,Object>> recArray = ScanDB.getEntryVisitorListByEntryMode(entryId, E_ENTRY_MODE.ENTRY_MODE_PASSENGER, vehicleId);		
 			
 			// TODO: parse recArray into a simple list with only the columns required
 			

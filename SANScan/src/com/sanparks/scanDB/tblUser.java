@@ -7,8 +7,8 @@ import com.memtrip.sqlking.schema.*;
 
 public class tblUser extends ScanTableBase implements IModel {
 
-	private DBForeignKey 	xavia_id;		
-	private DBForeignKey 	added_by_user_id;	// MUST be added by another user
+	private DBForeignKey 	xavia_fk;		
+	private DBForeignKey 	added_by_user_fk;	// MUST be added by another user
 	private DBString 		username;			
 	private DBString 		first_name;		
 	private DBString 		last_name;			
@@ -58,20 +58,20 @@ public class tblUser extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
-	public int getXavia_id() {
-		return xavia_id.getVal();
+	public DBKey getXavia_fk() {
+		return (DBKey) xavia_fk.get();
 	}
 
-	public void setXavia_id(int xavia_id) {
-		this.xavia_id.setVal(xavia_id);
+	public void setXavia_fk(DBKey xavia_fk) {
+		this.xavia_fk.set(xavia_fk);
 	}
 
-	public int getAdded_by_user_id() {
-		return added_by_user_id.getVal();
+	public DBKey getAdded_by_user_fk() {
+		return (DBKey) added_by_user_fk.get();
 	}
 
-	public void setAdded_by_user_id(int user_id) {
-		this.added_by_user_id.setVal(user_id);
+	public void setAdded_by_user_fk(DBKey user_fk) {
+		this.added_by_user_fk.set(user_fk);
 	}
 
 	public String getUsername() {
@@ -130,7 +130,7 @@ public class tblUser extends ScanTableBase implements IModel {
 		this.biometric_hash.setVal(biometric_hash);
 	}
 
-	public boolean isB_administrator() {
+	public boolean getB_administrator() {
 		return b_administrator.isVal();
 	}
 
@@ -138,7 +138,7 @@ public class tblUser extends ScanTableBase implements IModel {
 		this.b_administrator.setVal(b_administrator);
 	}
 
-	public boolean isB_create_user() {
+	public boolean getB_create_user() {
 		return b_create_user.isVal();
 	}
 
@@ -146,23 +146,23 @@ public class tblUser extends ScanTableBase implements IModel {
 		this.b_create_user.setVal(b_create_user);
 	}
 
-	public String getFirst_login_date() {
+	public String getFirst_login() {
 		return first_login.getValString();
 	}
 
-	public void setFirst_login_date(String first_login_date) throws ParseException {
+	public void setFirst_login(String first_login_date) throws ParseException {
 		first_login.setVal(first_login_date);
 	}
 
-	public String getLast_login_date() {
+	public String getLast_login() {
 		return last_login.getValString();
 	}
 
-	public void setLast_login_date(String last_login_date) throws ParseException {
+	public void setLast_login(String last_login_date) throws ParseException {
 		last_login.setVal(last_login_date);
 	}
 
-	public boolean isB_active() {
+	public boolean getB_active() {
 		return b_active.isVal();
 	}
 

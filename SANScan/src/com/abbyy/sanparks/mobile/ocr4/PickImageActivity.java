@@ -25,18 +25,18 @@ import java.io.File;
  */
 public class PickImageActivity extends NoSearchActivity {
 	/** Logging tag. */
-	private static final String TAG = "PickImageActivity";
+	public static final String TAG = "PickImageActivity";
 
-	public static final String KEY_IMAGE_URI = "com.abbyy.sanparks.mobile.ocr4.IMAGE_URI";
-	public static final String KEY_FROM_CAMERA = "com.abbyy.sanparks.mobile.ocr4.FROM_CAMERA";
+	public static final String KEY_IMAGE_URI = "com.abbyy.mobile.ocr4.IMAGE_URI";
+	public static final String KEY_FROM_CAMERA = "com.abbyy.mobile.ocr4.FROM_CAMERA";
 
 	/** A request code for picking image from a gallery. */
-	private static final int REQUEST_CODE_OPEN_PHOTO = 1;
+	public static final int REQUEST_CODE_OPEN_PHOTO = 1;
 	/** A request code for capturing image using a camera. */
-	private static final int REQUEST_CODE_TAKE_PHOTO = 2;
+	public static final int REQUEST_CODE_TAKE_PHOTO = 2;
 
 	/** Whether image must be captured using a camera or picked from a gallery. */
-	private boolean _isFromCamera = false;
+	private boolean _isFromCamera = true;
 	/** Image URI. */
 	private Uri _imageUri;
 	/** Has a result already been received. */

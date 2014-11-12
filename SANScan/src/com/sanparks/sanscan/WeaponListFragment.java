@@ -80,9 +80,9 @@ public class WeaponListFragment extends ListFragment {
 		if (activityContext != null)
 		{
 			// TODO: Get Current Entry Id here			
-			DBForeignKey entryId = null;
+//			DBForeignKey entryId = null;
 
-			ArrayList<Map<String,Object>> recArray = ScanDB.getEntryWeaponList(entryId);		
+//			ArrayList<Map<String,Object>> recArray = ScanDB.getEntryWeaponList(entryId);		
 				
 //			setListAdapter(new ArrayList<Map<String,Object>>(getActivity(),
 //					android.R.layout.simple_list_item_activated_1,

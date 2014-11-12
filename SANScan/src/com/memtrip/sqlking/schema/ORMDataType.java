@@ -22,14 +22,12 @@ package com.memtrip.sqlking.schema;
 public class ORMDataType {
 	public static final int FIELD_STRING 		= 0;
 	public static final int FIELD_INTEGER 		= 1;
-	public static final int FIELD_LONG 			= 2;
-	public static final int FIELD_DOUBLE 		= 3;
-	public static final int FIELD_BLOB 			= 4;
-	public static final int FIELD_BOOLEAN 		= 5;
-	public static final int FIELD_ENUM 			= 6;
-	public static final int FIELD_PRIMARY_KEY 	= 7;		// maps as an SQLite long and MySQL INT(11)
-	public static final int FIELD_FOREIGN_KEY 	= 8;		// maps as an SQLite long and MySQL INT(11)
-	public static final int FIELD_DATE 			= 9;		// maps as an SQLite integer and MySQL DATE
-	public static final int FIELD_TIME 			= 10;		// maps as an SQLite integer and MySQL TIME
-	public static final int FIELD_DATETIME 		= 11;		// maps as an SQLite long and MySQL TIMESTAMP
+	public static final int FIELD_BOOLEAN 		= 2;
+	public static final int FIELD_LONG 			= 3;
+	public static final int FIELD_DOUBLE 		= 4;
+	public static final int FIELD_BLOB 			= 5;
+	public static final int FIELD_DATE 			= 6;		// maps as an SQLite integer and MySQL DATE
+	public static final int FIELD_ENUM 			= 7;		// maps as an SQLite integer and a MySQL ENUM
+	public static final int FIELD_PRIMARY_KEY 	= 8;		// maps as an SQLite long and MySQL INT(11)
+	public static final int FIELD_FOREIGN_KEY 	= 9;		// maps as an SQLite long and MySQL INT(11)
 }

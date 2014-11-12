@@ -1,0 +1,153 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/title_vehicle_details"
+    android:background="#124325"
+    tools:context=".WizardEntryVehicleDetailActivity" >
+
+        <!-- android:background="#0099cc" -->
+    
+    <RelativeLayout
+        android:id="@+id/activity_entry_wizard_vehicle_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <EditText
+            android:id="@+id/editDriver_id_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/buttonScanDriverLicence"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLines="1" >
+
+        </EditText>
+
+        <CheckBox
+            android:id="@+id/checkbox_driver_id_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editDriver_id_number"
+            android:layout_alignBottom="@+id/editDriver_id_number"
+            android:layout_toRightOf="@+id/buttonScanDriverLicence" />
+
+        <EditText
+            android:id="@+id/edit_licence_plate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ButtonScanLicencePlate"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/edit_licence_disc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ButtonScanLicenceDisc"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <CheckBox
+            android:id="@+id/checkbox_licence_disc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/edit_licence_disc"
+            android:layout_toRightOf="@+id/buttonScanDriverLicence"
+            android:enabled="false" />
+
+        <CheckBox
+            android:id="@+id/checkbox_licence_plate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ButtonScanLicencePlate"
+            android:enabled="false" />
+
+        <CheckBox
+            android:id="@+id/checkboxDriverBiometrics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/buttonScanDriverBiometrics"
+            android:layout_alignLeft="@+id/checkbox_driver_id_number"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/buttonScanDriverLicence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_licence_disc"
+            android:layout_marginTop="14dp"
+            android:layout_toLeftOf="@+id/checkbox_licence_plate"
+            android:labelFor="@id/editDriver_id_number"
+            android:text="@string/title_scan_drivers_licence" />
+
+        <Button
+            android:id="@+id/buttonScanDriverBiometrics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonScanDriverLicence"
+            android:layout_below="@+id/editDriver_id_number"
+            android:layout_marginTop="14dp"
+            android:labelFor="@id/edit_licence_disc"
+            android:text="@string/title_scan_driver_biometrics" />
+
+        <Button
+            android:id="@+id/ButtonScanLicenceDisc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonScanDriverLicence"
+            android:layout_below="@+id/edit_licence_plate"
+            android:layout_marginTop="18dp"
+            android:labelFor="@id/edit_licence_disc"
+            android:text="@string/title_scan_licence_disc" />
+
+        <Button
+            android:id="@+id/ButtonScanLicencePlate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="44dp"
+            android:labelFor="@id/edit_licence_plate"
+            android:text="@string/title_scan_licence_plate" />
+
+        <ImageView
+            android:id="@+id/imageLicencePlate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ButtonScanLicenceDisc"
+            android:layout_alignRight="@+id/buttonScanDriverLicence"
+            android:layout_alignTop="@+id/ButtonScanLicencePlate"
+            android:layout_toRightOf="@+id/ButtonScanLicencePlate"
+            android:clickable="true" />
+
+    </RelativeLayout>
+	
+	<LinearLayout
+	          android:id="@+id/fullscreen_content_controls"
+	          style="?metaButtonBarStyle"
+	          android:layout_width="match_parent"
+	          android:layout_height="wrap_content"
+	          android:layout_gravity="bottom|center_horizontal"
+	          android:background="@color/black_overlay"
+	          android:orientation="horizontal"
+	          tools:ignore="UselessParent" >
+	
+	          <Button
+	              android:id="@+id/buttonWizardNext"
+	              style="?metaButtonBarButtonStyle"
+	              android:layout_width="0dp"
+	              android:layout_height="wrap_content"
+	              android:layout_weight="1"
+	              android:enabled="true"
+	              android:text="@string/button_wizard_next" />
+	
+	      </LinearLayout>
+    
+</FrameLayout>

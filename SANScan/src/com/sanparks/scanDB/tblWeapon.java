@@ -5,8 +5,8 @@ import com.memtrip.sqlking.schema.*;
 
 public class tblWeapon extends ScanTableBase implements IModel{
 
-	private DBForeignKey	visitor_id;
-	private DBEnum			weapon_type; // E_WEAPON_TYPE  
+	private DBForeignKey	visitor_fk;
+	private E_WEAPON_TYPE	weapon_type;   
 	private DBString		make;
 	private	DBString		model;
 	private DBString		caliber;
@@ -42,21 +42,17 @@ public class tblWeapon extends ScanTableBase implements IModel{
 //public int delete() {
 //	return 0;
 //}
-	public int getVisitor_id() {
-		return visitor_id.getVal();
+	public DBKey getVisitor_fk() {
+		return (DBKey) visitor_fk.get();
 	}
-	public void setVisitor_id(int visitor_id) {
-		this.visitor_id.setVal(visitor_id);
+	public void setVisitor_fk(DBKey visitor_fk) {
+		this.visitor_fk.set(visitor_fk);
 	}
 	public E_WEAPON_TYPE getWeapon_type() {
-		final Class<E_WEAPON_TYPE> enumClass = E_WEAPON_TYPE.class;
-
-		return (E_WEAPON_TYPE) weapon_type.getVal(enumClass);
+		return weapon_type;
 	}
 	public void setWeapon_type(E_WEAPON_TYPE newVal) {
-		final Class<E_WEAPON_TYPE> enumClass = E_WEAPON_TYPE.class;
-
-		this.weapon_type.setVal(enumClass, newVal);
+		this.weapon_type = newVal;
 	}
 
 	public String getMake() {
@@ -89,7 +85,7 @@ public class tblWeapon extends ScanTableBase implements IModel{
 	public void setLicence_number(String licence_number) {
 		this.licence_number.setVal(licence_number);
 	}
-	public boolean isB_licence_valid() {
+	public boolean getB_licence_valid() {
 		return b_licence_valid.isVal();
 	}
 	public void setB_licence_valid(boolean b_licence_valid) {

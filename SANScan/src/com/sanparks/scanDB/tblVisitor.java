@@ -1,15 +1,15 @@
 package com.sanparks.scanDB;
 
 import java.text.ParseException;
+import java.util.Date;
 
-import com.memtrip.sqlking.base.*;
 import com.memtrip.sqlking.schema.*;
 
-public class tblVisitor extends ScanTableBase implements IModel {
+public class tblVisitor extends ScanTableBase {
 
 	private DBString 	first_name;
 	private DBString 	last_name;
-	private DBEnum 		id_type;			// E_ID_TYPE
+	private E_ID_TYPE 	id_type;			// E_ID_TYPE
 	private DBString 	id_number;			// ID/Passport Number
 	private DBDate 		first_entry;		// YYYY-MM-DD HH24:MM:SS
 	private DBInteger 	entry_count;		// incremented on each entry			
@@ -49,6 +49,23 @@ public class tblVisitor extends ScanTableBase implements IModel {
 //		return 0;
 //	}
 
+	@Override
+	public DBPrimaryKey add () {
+		
+		Date today = new Date();
+	
+		setEntry_count(1);
+
+		try {
+			setFirst_entry(today.toString());
+			setLast_entry(today.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return super.add();
+	}
+
 	public String getFirst_name() {
 		return first_name.getVal();
 	}
@@ -74,15 +91,11 @@ public class tblVisitor extends ScanTableBase implements IModel {
 	}
 
 	public E_ID_TYPE getId_type() {
-		final Class<E_ID_TYPE> enumClass = E_ID_TYPE.class;
-		
-		return (E_ID_TYPE) id_type.getVal(enumClass);
+		return id_type;
 	}
 
 	public void setId_type(E_ID_TYPE newVal) {
-		final Class<E_ID_TYPE> enumClass = E_ID_TYPE.class;
-
-		this.id_type.setVal(enumClass, newVal);
+		this.id_type = newVal;
 	}	
 	
 	public String getFirst_entry() {

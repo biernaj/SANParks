@@ -6,6 +6,10 @@ public class DBBlob implements IColumn {
 
 	byte[] val;
 	
+	public DBBlob get() {
+		return this;
+	}
+
 	public byte[] getVal () {
 		return val;
 	}
